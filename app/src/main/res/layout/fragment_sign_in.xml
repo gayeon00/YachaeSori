@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".presentation.feature.signin.SignInFragment">
+
+    <TextView
+        android:id="@+id/yachaeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="야채소리"
+        android:textAlignment="center"
+        android:textSize="60sp" />
+
+
+<!--    <Button
+        android:id="@+id/kakaoSignInButton"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FEE500"
+        android:text="카카오로 시작하기"
+        android:textColor="#D9000000"
+        app:icon="@drawable/kakao_logo_18"
+        app:iconTint="@null"
+        app:iconTintMode="multiply" />-->
+
+    <ImageView
+        android:id="@+id/kakaoSignInButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/kakao_login_large_wide" />
+
+</LinearLayout>
