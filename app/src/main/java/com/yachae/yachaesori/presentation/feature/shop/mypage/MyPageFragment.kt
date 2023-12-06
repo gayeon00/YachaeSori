@@ -1,4 +1,4 @@
-package com.yachae.yachaesori.feature.mypage
+package com.yachae.yachaesori.presentation.feature.shop.mypage
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
