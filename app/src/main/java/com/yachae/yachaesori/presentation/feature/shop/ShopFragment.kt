@@ -29,9 +29,6 @@ class ShopFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        childFragmentManager.beginTransaction().replace(R.id.fragmentContainerView,
-            SignInFragment()
-        ).commit()
 
         initBottomNavigation()
         return fragmentShopBinding.root
@@ -39,14 +36,14 @@ class ShopFragment : Fragment() {
 
     private fun initBottomNavigation() {
         homeFragment = HomeFragment()
-        childFragmentManager.beginTransaction().replace(R.id.fragmentContainerView,homeFragment!!).commit()
+        childFragmentManager.beginTransaction().replace(R.id.fragmentContainerViewShop,homeFragment!!).commit()
 
         fragmentShopBinding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.item_home -> {
                     if(homeFragment == null) {
                         homeFragment = HomeFragment()
-                        childFragmentManager.beginTransaction().add(R.id.fragmentContainerView, homeFragment!!).commit()
+                        childFragmentManager.beginTransaction().add(R.id.fragmentContainerViewShop, homeFragment!!).commit()
                     }
 
                     if(homeFragment!=null) childFragmentManager.beginTransaction().show(homeFragment!!).commit()
@@ -60,7 +57,7 @@ class ShopFragment : Fragment() {
                 R.id.item_mypage -> {
                     if(myPageFragment == null) {
                         myPageFragment = MyPageFragment()
-                        childFragmentManager.beginTransaction().add(R.id.fragmentContainerView, myPageFragment!!).commit()
+                        childFragmentManager.beginTransaction().add(R.id.fragmentContainerViewShop, myPageFragment!!).commit()
                     }
 
                     if(homeFragment!=null) childFragmentManager.beginTransaction().hide(homeFragment!!).commit()
