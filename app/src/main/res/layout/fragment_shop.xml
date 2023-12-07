@@ -16,7 +16,7 @@
         app:title="야채소리" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/fragmentContainerViewShop"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
