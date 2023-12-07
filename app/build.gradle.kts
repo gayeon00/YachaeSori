@@ -95,6 +95,11 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
 
+    //viewpager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    //bannerviewpager
+    implementation("com.github.zhpanvip:bannerviewpager:3.5.12")
+
 }
 
 // Allow references to generated code
