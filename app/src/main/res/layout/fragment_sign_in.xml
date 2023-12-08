@@ -9,7 +9,7 @@
     tools:context=".presentation.feature.signin.SignInFragment">
 
     <TextView
-        android:id="@+id/yachaeTitle"
+        android:id="@+id/yachae_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="야채소리"
@@ -30,7 +30,7 @@
         app:iconTintMode="multiply" />-->
 
     <ImageView
-        android:id="@+id/kakaoSignInButton"
+        android:id="@+id/kakao_signin_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/kakao_login_large_wide" />

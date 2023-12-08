@@ -10,7 +10,17 @@
     <com.zhpan.bannerview.BannerViewPager
         android:id="@+id/banner_view"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:bvp_indicator_slide_mode="worm"/>
+        android:layout_height="160dp"
+        app:bvp_indicator_slide_mode="worm" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_home"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

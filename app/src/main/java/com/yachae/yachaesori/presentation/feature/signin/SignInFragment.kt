@@ -40,7 +40,7 @@ class SignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fragmentSignInBinding.run {
-            kakaoSignInButton.setOnClickListener {
+            kakaoSigninButton.setOnClickListener {
                 signInWithKakao()
             }
         }

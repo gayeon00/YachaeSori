@@ -55,13 +55,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun showSignInFragment() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, SignInFragment())
+            .replace(R.id.fragment_container_view, SignInFragment())
             .commit()
     }
 
     private fun showShopFragment() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, ShopFragment())
+            .replace(R.id.fragment_container_view, ShopFragment())
             .commit()
     }
 
