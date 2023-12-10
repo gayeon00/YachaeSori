@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".presentation.feature.shop.mypage.MyPageFragment" >
+    android:padding="12dp"
+    tools:context=".presentation.feature.shop.home.product.ProductFragment">
 
-    <Button
-        android:id="@+id/btn_logout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_products"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="로그아웃" />
+        android:layout_height="match_parent" />
 </LinearLayout>

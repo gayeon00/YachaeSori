@@ -8,7 +8,7 @@
     tools:context=".presentation.feature.shop.ShopFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/materialToolbar"
+        android:id="@+id/toolbar_shop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
@@ -16,13 +16,13 @@
         app:title="야채소리" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerViewShop"
+        android:id="@+id/fragment_container_view_shop"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/bottom_navigation_shop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/menu_bottom_nav" />

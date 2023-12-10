@@ -36,14 +36,14 @@ class ShopFragment : Fragment() {
 
     private fun initBottomNavigation() {
         homeFragment = HomeFragment()
-        childFragmentManager.beginTransaction().replace(R.id.fragmentContainerViewShop,homeFragment!!).commit()
+        childFragmentManager.beginTransaction().replace(R.id.fragment_container_view_shop,homeFragment!!).commit()
 
-        fragmentShopBinding.bottomNavigationView.setOnItemSelectedListener {
+        fragmentShopBinding.bottomNavigationShop.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.item_home -> {
                     if(homeFragment == null) {
                         homeFragment = HomeFragment()
-                        childFragmentManager.beginTransaction().add(R.id.fragmentContainerViewShop, homeFragment!!).commit()
+                        childFragmentManager.beginTransaction().add(R.id.fragment_container_view_shop, homeFragment!!).commit()
                     }
 
                     if(homeFragment!=null) childFragmentManager.beginTransaction().show(homeFragment!!).commit()
@@ -57,7 +57,7 @@ class ShopFragment : Fragment() {
                 R.id.item_mypage -> {
                     if(myPageFragment == null) {
                         myPageFragment = MyPageFragment()
-                        childFragmentManager.beginTransaction().add(R.id.fragmentContainerViewShop, myPageFragment!!).commit()
+                        childFragmentManager.beginTransaction().add(R.id.fragment_container_view_shop, myPageFragment!!).commit()
                     }
 
                     if(homeFragment!=null) childFragmentManager.beginTransaction().hide(homeFragment!!).commit()
