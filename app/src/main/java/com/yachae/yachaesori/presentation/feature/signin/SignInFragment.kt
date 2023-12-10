@@ -6,26 +6,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-import com.yachae.yachaesori.AuthViewModel
-import com.yachae.yachaesori.MainActivity
-import com.yachae.yachaesori.R
-import com.yachae.yachaesori.data.repository.SignInRepository
 import com.yachae.yachaesori.databinding.FragmentSignInBinding
-import com.yachae.yachaesori.domain.usecase.SignInUserUseCase
-import com.yachae.yachaesori.presentation.feature.shop.ShopFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInFragment : Fragment() {
     private var _fragmentSignInBinding: FragmentSignInBinding? = null
     private val fragmentSignInBinding get() = _fragmentSignInBinding!!
 
-    private val authViewModel: AuthViewModel by activityViewModels()
+    private val signInViewModel: SignInViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -50,15 +45,15 @@ class SignInFragment : Fragment() {
         // 카카오톡 어플이 있으면 카톡으로 로그인, 없으면 카카오 계정으로 로그인
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
 
-            UserApiClient.instance.loginWithKakaoTalk(requireContext()) { token, error ->
+            UserApiClient.instance.loginWithKakaoTalk(requireContext()) { kakaoToken, error ->
                 Log.d("카카오", "카톡으로 로그인")
                 if (error != null) {
                     if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                         return@loginWithKakaoTalk
                     }
                     loginWithKaKaoAccount(requireContext())
-                } else if (token != null) {
-                    authViewModel.signInWithYachae(token.accessToken)
+                } else if (kakaoToken != null) {
+                    signInViewModel.signInWithYachae(kakaoToken.accessToken)
 //                    getCustomToken(token.accessToken)
                 }
             }
@@ -75,10 +70,9 @@ class SignInFragment : Fragment() {
         UserApiClient.instance.loginWithKakaoAccount(context) { token, error ->
             if (error != null) {
                 Log.e("카카오", "로그인 실패", error)
-            }
-            else if (token != null) {
+            } else if (token != null) {
                 Log.i("카카오", "로그인 성공 ${token.accessToken}")
-                authViewModel.signInWithYachae(token.accessToken)
+                signInViewModel.signInWithYachae(token.accessToken)
             }
         }
     }

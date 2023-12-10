@@ -5,6 +5,7 @@ import android.content.Context
 import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class YachaeApplication : Application() {
     private var appContext: Context? = null
     override fun onCreate() {
