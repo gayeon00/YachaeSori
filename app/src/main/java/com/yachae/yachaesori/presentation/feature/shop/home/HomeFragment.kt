@@ -13,7 +13,7 @@ import com.yachae.yachaesori.R
 import com.yachae.yachaesori.databinding.FragmentHomeBinding
 import com.yachae.yachaesori.presentation.feature.shop.home.company.CompanyFragment
 import com.yachae.yachaesori.presentation.feature.shop.home.guide.GuideFragment
-import com.yachae.yachaesori.presentation.feature.shop.home.product.ProductFragment
+import com.yachae.yachaesori.presentation.feature.shop.home.product.ProductListFragment
 import com.zhpan.bannerview.BannerViewPager
 
 class HomeFragment : Fragment() {
@@ -104,7 +104,7 @@ class HomeTabsAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 }
 
 enum class HomeTabs(val fragment: Fragment, val title: String) {
-    PRODUCT(ProductFragment(), "상품"),
+    PRODUCT(ProductListFragment(), "상품"),
     GUIDE(GuideFragment(), "손질법"),
     COMPANY(CompanyFragment(), "회사소개")
 }
