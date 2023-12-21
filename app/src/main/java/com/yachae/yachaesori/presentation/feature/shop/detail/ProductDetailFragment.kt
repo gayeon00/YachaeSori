@@ -32,7 +32,8 @@ class ProductDetailFragment : Fragment() {
 
     private fun setPurchaseButton() {
         binding.btnPayment.setOnClickListener {
-            //TODO: 구매하기 버튼 누르면 시트 올라와서 옵션 선택
+            val modalBottomSheet = ModalBottomSheet()
+            modalBottomSheet.show(childFragmentManager, ModalBottomSheet.TAG)
         }
     }
 

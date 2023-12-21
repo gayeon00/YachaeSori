@@ -33,7 +33,7 @@
             tools:text="샐러드 야채" />
 
         <TextView
-            android:id="@+id/tv_product_price"
+            android:id="@+id/tv_list_product_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
