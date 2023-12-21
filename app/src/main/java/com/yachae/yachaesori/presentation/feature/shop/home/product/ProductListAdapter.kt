@@ -1,13 +1,17 @@
 package com.yachae.yachaesori.presentation.feature.shop.home.product
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.yachae.yachaesori.MainActivity
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.Product
 import com.yachae.yachaesori.databinding.ListItemProductBinding
+import com.yachae.yachaesori.presentation.feature.shop.detail.ProductDetailFragment
 
 class ProductListAdapter() :
     ListAdapter<Product, ProductListAdapter.ProductItemViewHolder>(ProductDiffCallBack()) {
@@ -31,19 +35,25 @@ class ProductListAdapter() :
         private val listItemProductBinding: ListItemProductBinding
     ) : RecyclerView.ViewHolder(listItemProductBinding.root) {
 
-        init {
-            listItemProductBinding.root.setOnClickListener {
-                //TODO: 클릭하면 상세 페이지로 넘어가기
-            }
+        private fun navigateToProductDetail(product: Product, view: View) {
+            Log.d("ProductListAdapter", "View: $view, Context: ${view.context}")
+            (view.context as MainActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host, ProductDetailFragment()).commit()
+
+
         }
 
-        fun bind(product: Product) {
+
+        fun bind(item: Product) {
             listItemProductBinding.run {
-                tvProductName.text = product.name
-                tvProductPrice.text = product.price
+                tvProductName.text = item.name
+                tvProductPrice.text = item.price
                 //TODO: 이미지넣어주기
                 ivProduct.setImageResource(R.drawable.ic_launcher_background)
 
+                root.setOnClickListener {
+                    navigateToProductDetail(item, it)
+                }
 
             }
         }
