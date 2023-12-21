@@ -3,7 +3,7 @@ package com.yachae.yachaesori
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
 import com.yachae.yachaesori.databinding.ActivityMainBinding
 import com.yachae.yachaesori.presentation.feature.shop.ShopFragment
 import com.yachae.yachaesori.presentation.feature.signin.SignInFragment
@@ -26,12 +26,14 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.currentUser.observe(this) { user ->
             if (user == null) {
                 // 사용자가 로그인되어 있지 않으면 SignInFragment를 표시
+//                navController.navigate(R.id.signInFragment)
                 showSignInFragment()
-            } else {
-                // 사용자가 로그인되어 있으면 ShopFragment를 표시
+            } else  {
+//                navController.navigate(R.id.shopFragment)
                 showShopFragment()
             }
         }
+
 
         // AuthStateListener 추가
         mainViewModel.addAuthStateListener()
@@ -48,21 +50,21 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun showSignInFragment() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, SignInFragment())
-            .commit()
-    }
+        private fun showSignInFragment() {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host, SignInFragment())
+                .commit()
+        }
 
-    private fun showShopFragment() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, ShopFragment())
-            .commit()
-    }
+        private fun showShopFragment() {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host, ShopFragment())
+                .commit()
+        }
 
-    fun showSnackBar(str: CharSequence) {
-        Snackbar.make(activityMainBinding.root, str, Snackbar.LENGTH_SHORT).show()
-    }
-
-
+        fun showFragment(fragment: Fragment) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host, fragment)
+                .commit()
+        }
 }
