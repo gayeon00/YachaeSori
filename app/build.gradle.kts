@@ -110,6 +110,9 @@ dependencies {
     //Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
+    //PowerSpinner
+    implementation("com.github.skydoves:powerspinner:1.2.7")
+
 }
 
 // Allow references to generated code

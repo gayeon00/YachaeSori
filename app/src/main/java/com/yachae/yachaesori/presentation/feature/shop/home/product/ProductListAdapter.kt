@@ -47,7 +47,7 @@ class ProductListAdapter() :
         fun bind(item: Product) {
             listItemProductBinding.run {
                 tvProductName.text = item.name
-                tvProductPrice.text = item.price
+                tvListProductPrice.text = item.price
                 //TODO: 이미지넣어주기
                 ivProduct.setImageResource(R.drawable.ic_launcher_background)
 
