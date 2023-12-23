@@ -15,13 +15,9 @@
     <!-- Right-End Arrow Icon -->
 <!--    왜 아이템 인식이 안되지..?-->
     <item
-        android:width="24dp"
-        android:height="24dp"
+        android:drawable="@drawable/expand_more_24px"
         android:gravity="end|center_vertical"
         android:right="8dp">
-        <bitmap
-            android:src="@drawable/expand_more_24px"
-            android:tint="?android:attr/textColorPrimary" />
     </item>
 
 </layer-list>
