@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
-        android:name="com.yachae.yachaesori.presentation.feature.shop.detail.ProductDetailFragment"
+        android:name="com.yachae.yachaesori.presentation.feature.detail.ProductDetailFragment"
         android:label="ProductDetailFragment" />
     <fragment
         android:id="@+id/signInFragment"

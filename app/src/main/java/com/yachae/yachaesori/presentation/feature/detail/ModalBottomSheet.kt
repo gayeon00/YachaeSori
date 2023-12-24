@@ -1,4 +1,4 @@
-package com.yachae.yachaesori.presentation.feature.shop.detail
+package com.yachae.yachaesori.presentation.feature.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,10 @@ import android.view.ViewGroup.LayoutParams
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.yachae.yachaesori.MainActivity
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.databinding.ModalBottomSheetContentBinding
+import com.yachae.yachaesori.presentation.feature.payment.PaymentFragment
 
 class ModalBottomSheet : BottomSheetDialogFragment() {
     private var _binding: ModalBottomSheetContentBinding? = null
@@ -23,8 +25,17 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
         _binding = ModalBottomSheetContentBinding.inflate(layoutInflater)
 
         addSpinner()
+        setPurchaseButton()
 
         return binding.root
+    }
+
+    private fun setPurchaseButton() {
+        binding.btnOptionPayment.setOnClickListener {
+            //결제 창으로 넘어가기
+            (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host, PaymentFragment()).commit()
+        }
     }
 
     private fun addSpinner() {

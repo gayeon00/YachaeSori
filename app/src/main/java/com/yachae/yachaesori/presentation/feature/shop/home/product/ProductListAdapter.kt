@@ -11,7 +11,7 @@ import com.yachae.yachaesori.MainActivity
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.Product
 import com.yachae.yachaesori.databinding.ListItemProductBinding
-import com.yachae.yachaesori.presentation.feature.shop.detail.ProductDetailFragment
+import com.yachae.yachaesori.presentation.feature.detail.ProductDetailFragment
 
 class ProductListAdapter() :
     ListAdapter<Product, ProductListAdapter.ProductItemViewHolder>(ProductDiffCallBack()) {
