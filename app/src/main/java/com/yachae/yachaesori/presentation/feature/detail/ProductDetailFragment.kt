@@ -1,4 +1,4 @@
-package com.yachae.yachaesori.presentation.feature.shop.detail
+package com.yachae.yachaesori.presentation.feature.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -32,7 +32,8 @@ class ProductDetailFragment : Fragment() {
 
     private fun setPurchaseButton() {
         binding.btnPayment.setOnClickListener {
-            //TODO: 구매하기 버튼 누르면 시트 올라와서 옵션 선택
+            val modalBottomSheet = ModalBottomSheet()
+            modalBottomSheet.show(childFragmentManager, ModalBottomSheet.TAG)
         }
     }
 
@@ -47,13 +48,17 @@ class ProductDetailFragment : Fragment() {
                 when (tab.position) {
                     0 -> {
                         childFragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container_view_detail, DetailImagesFragment.newInstance("", ""))
+                            .replace(R.id.fragment_container_view_detail,
+                                DetailImagesFragment.newInstance("", "")
+                            )
                             .commit()
                     }
 
                     1 -> {
                         childFragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container_view_detail, QnAFragment.newInstance("", ""))
+                            .replace(R.id.fragment_container_view_detail,
+                                QnAFragment.newInstance("", "")
+                            )
                             .commit()
                     }
                 }

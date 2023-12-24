@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?><!-- spinner_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background Shape with Border -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="4dp" />
+            <solid android:color="@color/white" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/border" />
+        </shape>
+    </item>
+
+    <!-- Right-End Arrow Icon -->
+<!--    왜 아이템 인식이 안되지..?-->
+    <item
+        android:drawable="@drawable/expand_more_24px"
+        android:gravity="end|center_vertical"
+        android:right="8dp">
+    </item>
+
+</layer-list>

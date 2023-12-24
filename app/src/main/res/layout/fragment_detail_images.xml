@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.feature.shop.detail.DetailImagesFragment">
+    tools:context=".presentation.feature.detail.DetailImagesFragment">
 
 
         <!--            adjustviewBounds로 이미지 위아래 여백 해결...-->

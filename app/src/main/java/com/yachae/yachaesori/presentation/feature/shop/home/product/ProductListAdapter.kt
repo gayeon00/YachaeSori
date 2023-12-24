@@ -11,7 +11,7 @@ import com.yachae.yachaesori.MainActivity
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.Product
 import com.yachae.yachaesori.databinding.ListItemProductBinding
-import com.yachae.yachaesori.presentation.feature.shop.detail.ProductDetailFragment
+import com.yachae.yachaesori.presentation.feature.detail.ProductDetailFragment
 
 class ProductListAdapter() :
     ListAdapter<Product, ProductListAdapter.ProductItemViewHolder>(ProductDiffCallBack()) {
@@ -47,7 +47,7 @@ class ProductListAdapter() :
         fun bind(item: Product) {
             listItemProductBinding.run {
                 tvProductName.text = item.name
-                tvProductPrice.text = item.price
+                tvListProductPrice.text = item.price
                 //TODO: 이미지넣어주기
                 ivProduct.setImageResource(R.drawable.ic_launcher_background)
 
