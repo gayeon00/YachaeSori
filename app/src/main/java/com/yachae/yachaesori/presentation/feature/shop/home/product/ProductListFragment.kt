@@ -12,19 +12,17 @@ class ProductListFragment : Fragment() {
     private val adapter = ProductListAdapter()
     private var _fragmentProductBinding: FragmentProductListBinding? = null
     private val fragmentProductBinding get() = _fragmentProductBinding!!
-    
+
     private val productList = mutableListOf(
-        Product("test1","","test1", "1,000원"),
-        Product("test1","","test1", "1,000원"),
-        Product("test1","","test1", "1,000원"),
-        Product("test1","","test1", "1,000원"),
-        Product("test1","","test1", "1,000원"),
-        Product("test1","","test1", "1,000원"),
-        Product("test1","","test1", "1,000원"),
-        Product("test1","","test1", "1,000원"),
-        Product("test1","","test1", "1,000원"),
-        Product("test1","","test1", "1,000원")
+        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
+        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
+        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
+        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
+        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
+        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
+        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4"))
     )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
