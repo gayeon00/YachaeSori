@@ -14,11 +14,11 @@ import com.yachae.yachaesori.databinding.ListItemProductBinding
 import com.yachae.yachaesori.presentation.feature.detail.ProductDetailFragment
 
 class ProductListAdapter() :
-    ListAdapter<Product, ProductListAdapter.ProductItemViewHolder>(ProductDiffCallBack()) {
+    ListAdapter<Product, ProductListAdapter.ProductViewHolder>(ProductDiffCallBack()) {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductItemViewHolder {
-        return ProductItemViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+        return ProductViewHolder(
             ListItemProductBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -27,11 +27,11 @@ class ProductListAdapter() :
         )
     }
 
-    override fun onBindViewHolder(holder: ProductItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ProductItemViewHolder(
+    class ProductViewHolder(
         private val listItemProductBinding: ListItemProductBinding
     ) : RecyclerView.ViewHolder(listItemProductBinding.root) {
 

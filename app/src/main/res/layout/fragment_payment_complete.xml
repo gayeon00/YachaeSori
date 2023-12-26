@@ -15,9 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            app:title="주문/결제 완료"
-            app:navigationIcon="@drawable/close_24px"/>
-            
+            app:navigationIcon="@drawable/close_24px"
+            app:title="주문/결제 완료" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -32,7 +32,7 @@
 
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_pay_due"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="32dp"
@@ -56,14 +56,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.5"
-                        android:text="배송 정보" />
+                        android:text="배송 정보"
+                        android:textSize="17sp" />
 
                     <TextView
                         android:id="@+id/tv_pay_comp_address"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7.5"
-                        android:text="홍길동 / 010-0000-0000\n[12345] 부산 부산구 부산로1길 11 101호" />
+                        android:text="홍길동 / 010-0000-0000\n[12345] 부산 부산구 부산로1길 11 101호"
+                        android:textSize="17sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -76,7 +78,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.5"
-                        android:text="결제 금액" />
+                        android:text="결제 금액"
+                        android:textSize="17sp" />
 
                     <TextView
                         android:id="@+id/tv_pay_comp_total_price"
@@ -84,6 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="7.5"
                         android:text="25,000원"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -97,14 +101,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.5"
-                        android:text="결제 정보" />
+                        android:text="결제 정보"
+                        android:textSize="17sp" />
 
                     <TextView
                         android:id="@+id/tv_pay_comp_account"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7.5"
-                        android:text="부산은행 266121234567" />
+                        android:text="부산은행 266121234567"
+                        android:textSize="17sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -117,7 +123,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.5"
-                        android:text="주문 상품" />
+                        android:text="주문 상품"
+                        android:textSize="17sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -130,10 +137,11 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="샐러드 야채" />
+                            android:text="샐러드 야채"
+                            android:textSize="17sp" />
 
                         <ImageView
-                            android:id="@+id/imageView"
+                            android:id="@+id/iv_item_expand"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:clickable="true"
@@ -143,11 +151,13 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_pay_comp_items"
+                    android:id="@+id/order_item_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="16dp"
+                    android:nestedScrollingEnabled="false"
                     android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="2"
                     tools:listitem="@layout/list_item_order_product" />
 
@@ -156,7 +166,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="16dp">
 
@@ -166,7 +176,8 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="주문 상세보기" />
+                    android:text="주문 상세보기"
+                    android:textSize="17sp" />
 
                 <View
                     android:layout_width="0dp"
@@ -178,7 +189,8 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:text="쇼핑 계속하기" />
+                    android:text="쇼핑 계속하기"
+                    android:textSize="17sp" />
             </LinearLayout>
 
         </LinearLayout>

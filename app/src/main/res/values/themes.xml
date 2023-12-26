@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.YachaeSori" parent="Base.Theme.YachaeSori" />
+<!--    기본 폰트 17sp가 좋을 듯-->
 </resources>

@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/iv_order_product"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_order_status"
@@ -63,9 +63,10 @@
         tools:text="2,000원" />
 
     <LinearLayout
+        android:id="@+id/layout_detail_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,10 +79,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="배송현황" />
+            android:text="배송현황"
+            app:strokeColor="@color/border" />
 
         <View
-            android:id="@+id/view2"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="0.04" />
@@ -92,6 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="문의하기" />
+            android:text="문의하기"
+            app:strokeColor="@color/border" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
