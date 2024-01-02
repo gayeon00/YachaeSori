@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.yachae.yachaesori.databinding.ActivityMainBinding
 import com.yachae.yachaesori.presentation.feature.shop.ShopFragment
 import com.yachae.yachaesori.presentation.feature.signin.SignInFragment
@@ -21,16 +22,19 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
 
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        val navController = navHostFragment.navController
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+
 
         // Auth 상태를 관찰하고 그에 따라 화면 전환
         mainViewModel.currentUser.observe(this) { user ->
             if (user == null) {
                 // 사용자가 로그인되어 있지 않으면 SignInFragment를 표시
-//                navController.navigate(R.id.signInFragment)
-                showSignInFragment()
-            } else  {
-//                navController.navigate(R.id.shopFragment)
-                showShopFragment()
+                navGraph.setStartDestination(R.id.signInFragment)
+            } else {
+                navGraph.setStartDestination(R.id.shopFragment)
             }
         }
 
@@ -49,22 +53,4 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.removeAuthStateListener()
     }
 
-
-        private fun showSignInFragment() {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host, SignInFragment())
-                .commit()
-        }
-
-        private fun showShopFragment() {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host, ShopFragment())
-                .commit()
-        }
-
-        fun showFragment(fragment: Fragment) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host, fragment)
-                .commit()
-        }
 }

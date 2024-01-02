@@ -9,7 +9,7 @@
         android:id="@+id/shopFragment"
         android:name="com.yachae.yachaesori.presentation.feature.shop.ShopFragment"
         android:label="fragment_shop"
-        tools:layout="@layout/fragment_shop" >
+        tools:layout="@layout/fragment_shop">
         <action
             android:id="@+id/action_shopFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment"
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.yachae.yachaesori.presentation.feature.detail.ProductDetailFragment"
-        android:label="ProductDetailFragment" >
+        android:label="ProductDetailFragment">
         <action
             android:id="@+id/action_productDetailFragment_to_paymentFragment2"
             app:destination="@id/paymentFragment2" />
@@ -30,7 +30,7 @@
         android:id="@+id/signInFragment"
         android:name="com.yachae.yachaesori.presentation.feature.signin.SignInFragment"
         android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" >
+        tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_shopFragment2"
             app:destination="@id/shopFragment"
@@ -46,7 +46,7 @@
         android:id="@+id/paymentFragment2"
         android:name="com.yachae.yachaesori.presentation.feature.payment.PaymentFragment"
         android:label="fragment_payment"
-        tools:layout="@layout/fragment_payment" >
+        tools:layout="@layout/fragment_payment">
         <action
             android:id="@+id/action_paymentFragment2_to_paymentCompleteFragment2"
             app:destination="@id/paymentCompleteFragment2"
@@ -56,7 +56,7 @@
         android:id="@+id/paymentCompleteFragment2"
         android:name="com.yachae.yachaesori.presentation.feature.payment.PaymentCompleteFragment"
         android:label="fragment_payment_complete"
-        tools:layout="@layout/fragment_payment_complete" >
+        tools:layout="@layout/fragment_payment_complete">
         <action
             android:id="@+id/action_paymentCompleteFragment2_to_orderDetailFragment2"
             app:destination="@id/orderDetailFragment2" />

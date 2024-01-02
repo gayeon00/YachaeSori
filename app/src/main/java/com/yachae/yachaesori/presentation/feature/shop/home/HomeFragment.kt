@@ -69,7 +69,7 @@ class HomeFragment : Fragment() {
         fragmentHomeBinding.tabLayoutHome.run {
             //viewpager와 연결
             TabLayoutMediator(this, tabViewPager) { tab, position ->
-                tab.text = HomeTabs.entries.map { it.title }[position]
+                tab.text = HomeTabs.entries[position].title
             }.attach()
 
             addOnTabSelectedListener(object :
@@ -93,20 +93,32 @@ class HomeFragment : Fragment() {
 
 }
 
-class HomeTabsAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class HomeTabsAdapter(private val fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = HomeTabs.entries.size
 
     override fun createFragment(position: Int): Fragment {
+        val tag = "f$position"
+        val existingFragment = fragment.childFragmentManager.findFragmentByTag(tag)
         // Return a NEW fragment instance in createFragment(int).
-        return HomeTabs.entries.map { it.fragment }[position]
+        return existingFragment ?: createNewFragment(position)
 
+    }
+
+    private fun createNewFragment(position: Int): Fragment {
+        val newFragment: Fragment = when (HomeTabs.entries[position]) {
+            HomeTabs.PRODUCT -> ProductListFragment()
+            HomeTabs.GUIDE -> GuideFragment()
+            HomeTabs.COMPANY -> CompanyFragment()
+        }
+
+        return newFragment
     }
 }
 
-enum class HomeTabs(val fragment: Fragment, val title: String) {
-    PRODUCT(ProductListFragment(), "상품"),
-    GUIDE(GuideFragment(), "손질법"),
-    COMPANY(CompanyFragment(), "회사소개")
+enum class HomeTabs(val title: String) {
+    PRODUCT("상품"),
+    GUIDE("손질법"),
+    COMPANY("회사소개")
 }
 
 

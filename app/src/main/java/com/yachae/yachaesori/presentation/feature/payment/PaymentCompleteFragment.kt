@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.yachae.yachaesori.MainActivity
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.OrderItem
@@ -42,17 +43,11 @@ class PaymentCompleteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setCloseButton()
+        setNaviIcon()
         setPayDetailButton()
         setContinueButton()
         setItemExpandButton()
         setItemList()
-    }
-
-    private fun setCloseButton() {
-        binding.toolbarPayComplete.setNavigationOnClickListener {
-            //닫기
-        }
     }
 
     private fun setItemList() {
@@ -80,16 +75,20 @@ class PaymentCompleteFragment : Fragment() {
     private fun setContinueButton() {
         binding.btnToOrderDetail.setOnClickListener {
             //주문 상세정보로 이동
-            (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host, OrderDetailFragment()).commit()
+            findNavController().navigate(R.id.action_paymentCompleteFragment2_to_orderDetailFragment2)
         }
     }
 
     private fun setPayDetailButton() {
         binding.btnContinueShopping.setOnClickListener {
             //쇼핑 홈으로 이동
-            (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host, ShopFragment()).commit()
+            findNavController().navigate(R.id.action_paymentCompleteFragment2_to_shopFragment)
+        }
+    }
+
+    private fun setNaviIcon() {
+        binding.toolbarPayComplete.setNavigationOnClickListener {
+            findNavController().popBackStack()
         }
     }
 }
