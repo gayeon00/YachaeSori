@@ -4,6 +4,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -37,8 +39,14 @@ class ProductListAdapter() :
 
         private fun navigateToProductDetail(product: Product, view: View) {
             Log.d("ProductListAdapter", "View: $view, Context: ${view.context}")
-            (view.context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host, ProductDetailFragment()).commit()
+
+            val navController = (view.context as MainActivity).findNavController(R.id.nav_host)
+            navController.navigate(R.id.action_shopFragment_to_productDetailFragment)
+            //homefragment에서 navcontroller를 찾고 있음 -> shop -> mainactivity의 navcontroller를 찾아야하는디
+//            view.findNavController()
+//                .navigate(R.id.action_shopFragment_to_productDetailFragment)
+//            (view.context as MainActivity).supportFragmentManager.beginTransaction()
+//                .replace(R.id.nav_host, ProductDetailFragment()).commit()
 
 
         }

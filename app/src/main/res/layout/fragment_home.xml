@@ -11,7 +11,8 @@
         android:id="@+id/banner_view"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        app:bvp_indicator_slide_mode="worm" />
+        app:bvp_indicator_slide_mode="worm"
+        android:saveEnabled="false"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout_home"
@@ -21,6 +22,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:saveEnabled="false"/>
 
 </LinearLayout>

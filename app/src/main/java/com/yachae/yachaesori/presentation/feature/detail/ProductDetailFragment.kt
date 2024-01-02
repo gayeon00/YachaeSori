@@ -25,14 +25,21 @@ class ProductDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setNaviIcon()
         setTabLayout()
         setPurchaseButton()
 
     }
 
+    private fun setNaviIcon() {
+        binding.toolbarDetail.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
     private fun setPurchaseButton() {
         binding.btnPayment.setOnClickListener {
-            val modalBottomSheet = ModalBottomSheet()
+            val modalBottomSheet = ModalBottomSheet(this)
             modalBottomSheet.show(childFragmentManager, ModalBottomSheet.TAG)
         }
     }
