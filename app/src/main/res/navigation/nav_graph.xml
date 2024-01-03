@@ -17,6 +17,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_shopFragment_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
@@ -63,5 +66,13 @@
         <action
             android:id="@+id/action_paymentCompleteFragment2_to_shopFragment"
             app:destination="@id/shopFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="com.yachae.yachaesori.presentation.feature.order.OrderListFragment"
+        android:label="OrderListFragment" >
+        <action
+            android:id="@+id/action_orderListFragment_to_orderDetailFragment2"
+            app:destination="@id/orderDetailFragment2" />
     </fragment>
 </navigation>

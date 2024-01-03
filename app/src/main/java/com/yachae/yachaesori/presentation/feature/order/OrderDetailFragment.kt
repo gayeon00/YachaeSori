@@ -9,22 +9,22 @@ import androidx.navigation.fragment.findNavController
 import com.yachae.yachaesori.data.OrderItem
 import com.yachae.yachaesori.data.Product
 import com.yachae.yachaesori.databinding.FragmentOrderDetailBinding
-import com.yachae.yachaesori.presentation.feature.payment.OrderListAdapter
+import com.yachae.yachaesori.presentation.feature.payment.ItemListAdapter
 
 class OrderDetailFragment : Fragment() {
-    private val adapter = OrderListAdapter(true)
+    private val adapter = ItemListAdapter(true)
     private var _binding: FragmentOrderDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val product = Product("test1", "", "test1", "1000", listOf("1", "2", "3", "4"))
+    private val product = Product("test1", "", "", "test1", "1000", listOf("1", "2", "3", "4"))
     private val orderItemList = mutableListOf(
-        OrderItem(product,"1",2,"입금대기"),
-        OrderItem(product,"1",2,"입금대기"),
-        OrderItem(product,"1",2,"입금대기"),
-        OrderItem(product,"1",2,"입금대기"),
-        OrderItem(product,"1",2,"입금대기"),
-        OrderItem(product,"1",2,"입금대기"),
-        OrderItem(product,"1",2,"입금대기")
+        OrderItem(product, "1", 2, 0),
+        OrderItem(product, "1", 2, 0),
+        OrderItem(product, "1", 2, 0),
+        OrderItem(product, "1", 2, 0),
+        OrderItem(product, "1", 2, 0),
+        OrderItem(product, "1", 2, 0),
+        OrderItem(product, "1", 2, 0)
     )
 
     override fun onCreateView(
