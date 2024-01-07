@@ -1,6 +1,7 @@
 package com.yachae.yachaesori.presentation.feature.shop.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +45,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        Log.d("Frag", "HomeFragment onCreateView")
         return fragmentHomeBinding.root
     }
 

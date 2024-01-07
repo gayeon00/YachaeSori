@@ -5,5 +5,5 @@ data class OrderItem(
     val product: Product,
     val selectedOption: String,
     val quantity: Int,
-    val status: String,
+    val status: Long,
 )

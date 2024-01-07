@@ -6,28 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.yachae.yachaesori.MainActivity
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.OrderItem
 import com.yachae.yachaesori.data.Product
 import com.yachae.yachaesori.databinding.FragmentPaymentCompleteBinding
-import com.yachae.yachaesori.presentation.feature.order.OrderDetailFragment
-import com.yachae.yachaesori.presentation.feature.shop.ShopFragment
 
 class PaymentCompleteFragment : Fragment() {
     private var _binding: FragmentPaymentCompleteBinding? = null
     private val binding get() = _binding!!
 
-    private val adapter = OrderListAdapter(false)
-    private val product = Product("test1", "", "test1", "1000", listOf("1", "2", "3", "4"))
+    private val adapter = ItemListAdapter(false)
+    private val product = Product("test1", "", "", "test1", "1000", listOf("1", "2", "3", "4"))
     private val orderItemList = mutableListOf(
-        OrderItem(product,"1",2,"입금대기"),
-        OrderItem(product,"1",2,"입금대기"),
-        OrderItem(product,"1",2,"입금대기"),
-        OrderItem(product,"1",2,"입금대기"),
-        OrderItem(product,"1",2,"입금대기"),
-        OrderItem(product,"1",2,"입금대기"),
-        OrderItem(product,"1",2,"입금대기")
+        OrderItem(product, "1", 2, 1),
+        OrderItem(product, "1", 2, 1),
+        OrderItem(product, "1", 2, 1),
+        OrderItem(product, "1", 2, 1),
+        OrderItem(product, "1", 2, 1),
+        OrderItem(product, "1", 2, 1),
+        OrderItem(product, "1", 2, 1)
     )
 
     override fun onCreateView(
@@ -63,7 +60,7 @@ class PaymentCompleteFragment : Fragment() {
     }
 
     private fun toggleListVisibility() {
-        if(binding.orderItemList.visibility == View.VISIBLE) {
+        if (binding.orderItemList.visibility == View.VISIBLE) {
             binding.ivItemExpand.setImageResource(R.drawable.expand_more_24px)
             binding.orderItemList.visibility = View.GONE
         } else {

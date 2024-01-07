@@ -14,13 +14,13 @@ class ProductListFragment : Fragment() {
     private val fragmentProductBinding get() = _fragmentProductBinding!!
 
     private val productList = mutableListOf(
-        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
-        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
-        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
-        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
-        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
-        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
-        Product("test1", "", "test1", "1,000원", listOf("1", "2", "3", "4"))
+        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
+        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
+        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
+        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
+        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
+        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
+        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4"))
     )
 
     override fun onCreateView(

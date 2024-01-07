@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.OrderItem
+import com.yachae.yachaesori.data.getOrderState
 import com.yachae.yachaesori.databinding.ListItemOrderProductBinding
 import java.text.DecimalFormat
 
-class OrderListAdapter(private val isDetail: Boolean) :
-    ListAdapter<OrderItem, OrderListAdapter.OrderItemViewHolder>(OrderItemDiffCallBack()) {
+class ItemListAdapter(private val isDetail: Boolean) :
+    ListAdapter<OrderItem, ItemListAdapter.OrderItemViewHolder>(OrderItemDiffCallBack()) {
     class OrderItemViewHolder(
         private val binding: ListItemOrderProductBinding,
         private val isDetail: Boolean
@@ -27,7 +28,7 @@ class OrderListAdapter(private val isDetail: Boolean) :
                 tvOrderProductPrice.text = item.product.price
                 //TODO: 이미지넣어주기
                 ivOrderProduct.setImageResource(R.drawable.ic_launcher_background)
-                tvOrderStatus.text = item.status
+                tvOrderStatus.text = getOrderState(item.status).str
                 tvOrderProductOption.text = "${item.selectedOption} / ${item.quantity}개"
                 tvOrderProductPrice.text =
                     "${dec.format(item.product.price.toInt() * item.quantity)}원"

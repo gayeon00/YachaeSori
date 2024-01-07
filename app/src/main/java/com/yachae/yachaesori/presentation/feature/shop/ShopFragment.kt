@@ -17,12 +17,11 @@ class ShopFragment : Fragment() {
     private var homeFragment: HomeFragment? = null
     private var myPageFragment: MyPageFragment? = null
 
-    private var homeState = true
-    private var myPageState = false
+    private var currentFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("shop", "shop oncreate")
+        Log.d(TAG, "shop oncreate")
         fragmentShopBinding = FragmentShopBinding.inflate(layoutInflater)
     }
 
@@ -30,59 +29,68 @@ class ShopFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        Log.d("shop", "shop onCreateView")
+        Log.d(TAG, "shop onCreateView")
         initBottomNavigation()
         return fragmentShopBinding.root
     }
 
     private fun initBottomNavigation() {
-        homeFragment = HomeFragment()
-        childFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view_shop, homeFragment!!).commit()
+        //상태에 따라 보여줄 화면 설정
+        when(fragmentShopBinding.bottomNavigationShop.selectedItemId) {
+            R.id.item_home -> {
+                showFragment(getOrCreateHomeFragment())
+            }
+            R.id.item_mypage-> {
+                showFragment(getOrCreateMyPageFragment())
+            }
+        }
 
+        //클릭할 때에 따라 보여줄 화면 설정
         fragmentShopBinding.bottomNavigationShop.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.item_home -> {
-                    if (homeFragment == null) {
-                        homeFragment = HomeFragment()
-                        childFragmentManager.beginTransaction()
-                            .add(R.id.fragment_container_view_shop, homeFragment!!).commit()
-                    }
-
-                    if (homeFragment != null) childFragmentManager.beginTransaction()
-                        .show(homeFragment!!).commit()
-                    if (myPageFragment != null) childFragmentManager.beginTransaction()
-                        .hide(myPageFragment!!).commit()
-                    homeState = true
-                    myPageState = false
-
-                    return@setOnItemSelectedListener true
+                    showFragment(getOrCreateHomeFragment())
                 }
-
                 R.id.item_mypage -> {
-                    if (myPageFragment == null) {
-                        myPageFragment = MyPageFragment()
-                        childFragmentManager.beginTransaction()
-                            .add(R.id.fragment_container_view_shop, myPageFragment!!).commit()
-                    }
-
-                    if (homeFragment != null) childFragmentManager.beginTransaction()
-                        .hide(homeFragment!!).commit()
-                    if (myPageFragment != null) childFragmentManager.beginTransaction()
-                        .show(myPageFragment!!).commit()
-                    homeState = false
-                    myPageState = true
-
-                    return@setOnItemSelectedListener true
+                    showFragment(getOrCreateMyPageFragment())
                 }
-
-                else -> {
-                    return@setOnItemSelectedListener true
-                }
-
-
             }
+            true
         }
+
+        // 초기화면 설정
+//        fragmentShopBinding.bottomNavigationShop.selectedItemId = R.id.item_home
+    }
+
+    private fun showFragment(fragmentToShow: Fragment) {
+        if (currentFragment != null) {
+            childFragmentManager.beginTransaction().hide(currentFragment!!).commit()
+        }
+
+        childFragmentManager.beginTransaction().show(fragmentToShow).commit()
+        currentFragment = fragmentToShow
+    }
+
+    private fun getOrCreateHomeFragment(): HomeFragment {
+        if (homeFragment == null) {
+            homeFragment = HomeFragment()
+            childFragmentManager.beginTransaction()
+                .add(R.id.fragment_container_view_shop, homeFragment!!).commit()
+        }
+        return homeFragment!!
+    }
+
+    private fun getOrCreateMyPageFragment(): MyPageFragment {
+        if (myPageFragment == null) {
+            myPageFragment = MyPageFragment()
+            childFragmentManager.beginTransaction()
+                .add(R.id.fragment_container_view_shop, myPageFragment!!).commit()
+        }
+        return myPageFragment!!
+    }
+
+    companion object {
+        const val TAG = "ShopFragment"
     }
 
 }

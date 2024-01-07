@@ -8,9 +8,8 @@
     android:paddingStart="8dp"
     android:paddingTop="12dp"
     android:paddingEnd="8dp"
-    android:paddingBottom="12dp"
-    tools:context=".presentation.feature.shop.home.product.ProductListFragment"
-    android:tag="f0">
+    android:tag="f0"
+    tools:context=".presentation.feature.shop.home.product.ProductListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/products_list"
