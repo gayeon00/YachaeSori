@@ -1,9 +1,6 @@
 package com.yachae.yachaesori.data
 
-import com.google.firebase.database.IgnoreExtraProperties
-
-@IgnoreExtraProperties
-data class Product(
+data class ProductUiState (
     val productId: String = "",
     val mainImageUrl: String = "",
     val detailImageUrl: String = "",

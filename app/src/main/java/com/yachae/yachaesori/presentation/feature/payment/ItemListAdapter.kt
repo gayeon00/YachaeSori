@@ -25,13 +25,13 @@ class ItemListAdapter(private val isDetail: Boolean) :
                     layoutDetailButtons.visibility = View.VISIBLE
                 }
                 tvOrderProductName.text = item.product.name
-                tvOrderProductPrice.text = item.product.price
+                tvOrderProductPrice.text = dec.format(item.product.price)
                 //TODO: 이미지넣어주기
                 ivOrderProduct.setImageResource(R.drawable.ic_launcher_background)
                 tvOrderStatus.text = getOrderState(item.status).str
                 tvOrderProductOption.text = "${item.selectedOption} / ${item.quantity}개"
                 tvOrderProductPrice.text =
-                    "${dec.format(item.product.price.toInt() * item.quantity)}원"
+                    "${dec.format(item.product.price * item.quantity)}원"
             }
         }
     }

@@ -28,7 +28,7 @@ class OrderListAdapter() :
             Log.d("ProductListAdapter", "View: $view, Context: ${view.context}")
 
             val navController = (view.context as MainActivity).findNavController(R.id.nav_host)
-            navController.navigate(R.id.action_shopFragment_to_orderListFragment)
+            navController.navigate(R.id.action_orderListFragment_to_orderDetailFragment2)
             //homefragment에서 navcontroller를 찾고 있음 -> shop -> mainactivity의 navcontroller를 찾아야하는디
 //            view.findNavController()
 //                .navigate(R.id.action_shopFragment_to_productDetailFragment)

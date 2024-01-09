@@ -39,8 +39,8 @@ class ProductDetailFragment : Fragment() {
 
     private fun setPurchaseButton() {
         binding.btnPayment.setOnClickListener {
-            val modalBottomSheet = ModalBottomSheet(this)
-            modalBottomSheet.show(childFragmentManager, ModalBottomSheet.TAG)
+            val optionBottomSheet = OptionBottomSheet(this)
+            optionBottomSheet.show(childFragmentManager, OptionBottomSheet.TAG)
         }
     }
 
