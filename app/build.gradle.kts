@@ -79,6 +79,8 @@ dependencies {
     implementation("com.google.firebase:firebase-database-ktx")
     //cloud storage
     implementation("com.google.firebase:firebase-storage-ktx")
+
+    implementation("com.firebaseui:firebase-ui-storage:7.2.0")
     //functions
     implementation("com.google.firebase:firebase-functions-ktx")
     //카카오 전체 모듈
@@ -109,6 +111,7 @@ dependencies {
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
 
     //PowerSpinner
     implementation("com.github.skydoves:powerspinner:1.2.7")

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
@@ -17,7 +18,7 @@ class OrderListFragment : Fragment() {
     private var _binding: FragmentOrderListBinding? = null
     private val binding get() = _binding!!
 
-    private val product = Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4"))
+    private val product = Product("test1", "", "", "test1", 1000, listOf("1", "2", "3", "4"))
 
     private val itemList = mutableListOf(
         OrderItem(product, "1", 10, 0),
@@ -40,6 +41,8 @@ class OrderListFragment : Fragment() {
     ): View {
         _binding = FragmentOrderListBinding.inflate(layoutInflater)
 
+        handleBackPress()
+
         binding.recyclerViewOrderList.adapter = adapter
         adapter.submitList(orderList)
         return binding.root
@@ -50,6 +53,15 @@ class OrderListFragment : Fragment() {
 
         setTabs()
         setNaviIcon()
+    }
+
+    private fun handleBackPress() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().popBackStack()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     private fun setNaviIcon() {

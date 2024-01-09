@@ -5,23 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.yachae.yachaesori.data.Product
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.yachae.yachaesori.databinding.FragmentProductListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProductListFragment : Fragment() {
     private val adapter = ProductListAdapter()
     private var _fragmentProductBinding: FragmentProductListBinding? = null
     private val fragmentProductBinding get() = _fragmentProductBinding!!
 
-    private val productList = mutableListOf(
-        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
-        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
-        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
-        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
-        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
-        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4")),
-        Product("test1", "", "", "test1", "1,000원", listOf("1", "2", "3", "4"))
-    )
+    private val productViewModel: ProductViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +24,14 @@ class ProductListFragment : Fragment() {
     ): View? {
         _fragmentProductBinding = FragmentProductListBinding.inflate(layoutInflater)
 
+        productViewModel.productList.observe(viewLifecycleOwner, Observer { productList ->
+            // 상품 목록이 업데이트되었을 때 수행할 로직
+            adapter.submitList(productList)
+
+        })
+
         fragmentProductBinding.productsList.adapter = adapter
-        adapter.submitList(productList)
+
 
         return fragmentProductBinding.root
     }

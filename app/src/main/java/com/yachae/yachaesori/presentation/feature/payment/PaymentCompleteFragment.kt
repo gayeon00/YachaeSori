@@ -16,7 +16,7 @@ class PaymentCompleteFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val adapter = ItemListAdapter(false)
-    private val product = Product("test1", "", "", "test1", "1000", listOf("1", "2", "3", "4"))
+    private val product = Product("test1", "", "", "test1", 1000, listOf("1", "2", "3", "4"))
     private val orderItemList = mutableListOf(
         OrderItem(product, "1", 2, 1),
         OrderItem(product, "1", 2, 1),
