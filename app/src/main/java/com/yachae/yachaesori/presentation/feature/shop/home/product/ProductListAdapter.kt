@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,6 +15,7 @@ import com.google.firebase.storage.ktx.storage
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.Product
 import com.yachae.yachaesori.databinding.ListItemProductBinding
+import com.yachae.yachaesori.presentation.feature.shop.ShopFragmentDirections
 import java.text.DecimalFormat
 
 class ProductListAdapter() :
@@ -33,32 +33,21 @@ class ProductListAdapter() :
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), position)
     }
 
     class ProductViewHolder(
         private val listItemProductBinding: ListItemProductBinding
     ) : RecyclerView.ViewHolder(listItemProductBinding.root) {
 
-        private fun navigateToProductDetail(product: Product, view: View) {
+        private fun navigateToProductDetail(position: Int, view: View) {
             Log.d("ProductListAdapter", "View: $view, Context: ${view.context}")
-
-//            val navController = (view.context as MainActivity).findNavController(R.id.nav_host)
-//
-//            navController.navigate(R.id.action_shopFragment_to_productDetailFragment)
-
-            view.findNavController().navigate(R.id.action_shopFragment_to_productDetailFragment)
-            //homefragment에서 navcontroller를 찾고 있음 -> shop -> mainactivity의 navcontroller를 찾아야하는디
-//            view.findNavController()
-//                .navigate(R.id.action_shopFragment_to_productDetailFragment)
-//            (view.context as MainActivity).supportFragmentManager.beginTransaction()
-//                .replace(R.id.nav_host, ProductDetailFragment()).commit()
-
-
+            val action = ShopFragmentDirections.actionShopFragmentToProductDetailFragment(position)
+            view.findNavController().navigate(action)
         }
 
 
-        fun bind(item: Product) {
+        fun bind(item: Product, position: Int) {
             listItemProductBinding.run {
 
                 tvProductName.text = item.name
@@ -73,7 +62,7 @@ class ProductListAdapter() :
 
 
                 root.setOnClickListener {
-                    navigateToProductDetail(item, it)
+                    navigateToProductDetail(position, it)
                 }
 
             }

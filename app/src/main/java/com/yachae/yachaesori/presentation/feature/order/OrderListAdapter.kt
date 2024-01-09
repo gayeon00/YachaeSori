@@ -43,7 +43,7 @@ class OrderListAdapter() :
                 textViewOrderState.text = getOrderState(item.status).str
                 textViewOrderNum.text = "No.${item.orderId}"
                 textViewOrderDate.text = item.orderDate
-                imageView2.setImageResource(R.drawable.ic_launcher_background)
+                imageViewMainImage.setImageResource(R.drawable.ic_launcher_background)
                 textViewOrderProducts.text ="${item.itemList[0].product.name} 외 ${item.itemList.size - 1}건"
                 textViewOrderOption.text =item.itemList[0].selectedOption
                 textViewOrderPrice.text =item.totalPrice.toString()
