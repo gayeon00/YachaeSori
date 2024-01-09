@@ -5,28 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.yachae.yachaesori.R
+import com.yachae.yachaesori.databinding.FragmentDetailImagesBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_DETAIL = "detailImageUrl"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailImagesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailImagesFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var detailImageUrl: String? = null
+
+    private var _binding: FragmentDetailImagesBinding?=null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            detailImageUrl = it.getString(ARG_DETAIL)
         }
     }
 
@@ -34,8 +33,24 @@ class DetailImagesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_images, container, false)
+        _binding = FragmentDetailImagesBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setDetailImage()
+
+    }
+
+    private fun setDetailImage() {
+        val storageReference = Firebase.storage.reference.child(detailImageUrl!!)
+
+        Glide.with(this)
+            .load(storageReference)
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(binding.ivProductDetail)
     }
 
     companion object {
@@ -43,17 +58,15 @@ class DetailImagesFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
+         * @param detailImageUrl Parameter 1.
          * @return A new instance of fragment DetailImagesFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(detailImageUrl: String) =
             DetailImagesFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_DETAIL, detailImageUrl)
                 }
             }
     }
