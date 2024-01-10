@@ -73,7 +73,7 @@ class ProductDetailFragment : Fragment() {
 
     private fun setPurchaseButton() {
         binding.btnPayment.setOnClickListener {
-            val optionBottomSheet = OptionBottomSheet(this)
+            val optionBottomSheet = OptionBottomSheet(this,product)
             optionBottomSheet.show(childFragmentManager, OptionBottomSheet.TAG)
         }
     }

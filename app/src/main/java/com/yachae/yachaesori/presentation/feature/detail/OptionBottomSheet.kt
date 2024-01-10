@@ -4,17 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.yachae.yachaesori.R
+import com.yachae.yachaesori.data.Product
+import com.yachae.yachaesori.databinding.ItemSelectedOptionBinding
 import com.yachae.yachaesori.databinding.ModalBottomSheetContentBinding
+import java.text.DecimalFormat
 
 class OptionBottomSheet(
-    private val fragment: Fragment
+    private val fragment: Fragment,
+    private val product: Product
 ) : BottomSheetDialogFragment() {
     private var _binding: ModalBottomSheetContentBinding? = null
     private val binding get() = _binding!!
@@ -26,10 +29,15 @@ class OptionBottomSheet(
     ): View {
         _binding = ModalBottomSheetContentBinding.inflate(layoutInflater)
 
-        addSpinner()
+        setOptionDropdown()
+        setTotalPrice()
         setPurchaseButton()
 
         return binding.root
+    }
+
+    private fun setTotalPrice() {
+        binding.layoutSelectedOptions.get
     }
 
     private fun setPurchaseButton() {
@@ -40,31 +48,59 @@ class OptionBottomSheet(
         }
     }
 
-    private fun addSpinner() {
-        //spinner programmatically 추가하기
-        val spinner = Spinner(requireContext())
+    private fun setOptionDropdown() {
+        (binding.autoCompleteTextView as MaterialAutoCompleteTextView).setSimpleItems(product.options.toTypedArray())
+        (binding.autoCompleteTextView as MaterialAutoCompleteTextView).setOnItemClickListener { _, _, position, _ ->
 
-        // Create an ArrayAdapter using the string array and a default spinner layout.
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.planets_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears.
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner.
-            spinner.adapter = adapter
-            spinner.layoutParams = ViewGroup.LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                160
-            )
-            spinner.setBackgroundResource(R.drawable.spinner_background)
+            val item =
+                binding.layoutSelectedOptions.findViewWithTag<LinearLayout>(product.options[position])
+
+            //새롭게 선택된 옵션이라면
+            if (item == null) {
+                val selectedOption = ItemSelectedOptionBinding.inflate(layoutInflater)
+                selectedOption.run {
+                    root.tag = product.options[position]
+                    tvSelectedOption.text = product.options[position]
+
+                    setPrice(product)
+
+
+                    btnPlus.setOnClickListener {
+                        tvProductCount.text =
+                            (tvProductCount.text.toString().toInt() + 1).toString()
+                        setPrice(product)
+                    }
+                    btnMinus.setOnClickListener {
+                        if (tvProductCount.text.toString().toInt() > 1) {
+                            tvProductCount.text =
+                                (tvProductCount.text.toString().toInt() - 1).toString()
+                        }
+                        setPrice(product)
+                    }
+                    btnRemove.setOnClickListener {
+                        binding.layoutSelectedOptions.removeView(selectedOption.root)
+                    }
+                }
+                binding.layoutSelectedOptions.addView(selectedOption.root)
+            }
+
+
         }
+    }
 
-        binding.layoutOptions.addView(spinner)
+    private fun setPrice() {
+
     }
 
     companion object {
         const val TAG = "OptionBottomSheet"
     }
+}
+
+private fun ItemSelectedOptionBinding.setPrice(product: Product) {
+    tvProductPrice.text = "${
+        DecimalFormat("#,###").format(
+            product.price * tvProductCount.text.toString().toInt()
+        )
+    }원"
 }
