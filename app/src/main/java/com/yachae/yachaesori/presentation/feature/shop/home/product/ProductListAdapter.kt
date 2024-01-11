@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.yachae.yachaesori.R
-import com.yachae.yachaesori.data.Product
+import com.yachae.yachaesori.data.model.Product
 import com.yachae.yachaesori.databinding.ListItemProductBinding
 import com.yachae.yachaesori.presentation.feature.shop.ShopFragmentDirections
 import java.text.DecimalFormat
@@ -54,12 +54,6 @@ class ProductListAdapter() :
                 val dec = DecimalFormat("#,###")
                 tvListProductPrice.text = dec.format(item.price)
                 ivProduct.setImageFromUrl(item.mainImageUrl)
-                if (ivProduct.drawable == null) {
-                    Log.d("ProductListAdapter", "null")
-                } else {
-                    Log.d("ProductListAdapter", ivProduct.drawable.toString())
-                }
-
 
                 root.setOnClickListener {
                     navigateToProductDetail(position, it)
@@ -71,10 +65,10 @@ class ProductListAdapter() :
     }
 }
 
-private fun ImageView.setImageFromUrl(mainImageUrl: String) {
+private fun ImageView.setImageFromUrl(imageUrl: String) {
 
-    Log.d("ProductListAdapter", mainImageUrl)
-    val storageReference = Firebase.storage.reference.child(mainImageUrl)
+    Log.d("ProductListAdapter", imageUrl)
+    val storageReference = Firebase.storage.reference.child(imageUrl)
 
     Glide.with(context)
         .load(storageReference)

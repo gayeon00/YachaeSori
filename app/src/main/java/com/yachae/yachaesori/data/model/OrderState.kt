@@ -1,5 +1,5 @@
-package com.yachae.yachaesori.data
-import com.yachae.yachaesori.data.OrderState.*
+package com.yachae.yachaesori.data.model
+import com.yachae.yachaesori.data.model.OrderState.*
 
 enum class OrderState(val code: Long, val str: String) {
     PAYMENT(1, "결제완료"),

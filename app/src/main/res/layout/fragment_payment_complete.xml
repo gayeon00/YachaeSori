@@ -159,7 +159,7 @@
                     android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="2"
-                    tools:listitem="@layout/list_item_order_product" />
+                    tools:listitem="@layout/list_item_selected_item" />
 
             </LinearLayout>
 

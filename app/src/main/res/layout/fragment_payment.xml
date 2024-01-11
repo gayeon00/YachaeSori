@@ -116,11 +116,13 @@
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_selected_item"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="3"
-                    tools:listitem="@layout/list_item_order_product" />
+                    tools:listitem="@layout/list_item_selected_item" />
 
             </LinearLayout>
 
@@ -166,7 +168,6 @@
                         android:id="@+id/paymentCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView"
                         tools:text="5,500원" />
                 </LinearLayout>
 
@@ -222,7 +223,6 @@
                         android:id="@+id/tv_total_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textStyle="bold"
                         tools:text="8,000원" />

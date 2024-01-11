@@ -1,4 +1,4 @@
-package com.yachae.yachaesori.data
+package com.yachae.yachaesori.data.model
 
 data class Order(
     // 주문 완료 상태로 전송

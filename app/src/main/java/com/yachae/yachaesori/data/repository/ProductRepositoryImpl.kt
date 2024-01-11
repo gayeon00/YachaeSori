@@ -4,7 +4,7 @@ import android.util.Log
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import com.yachae.yachaesori.data.Product
+import com.yachae.yachaesori.data.model.Product
 import com.yachae.yachaesori.domain.repository.ProductRepository
 import kotlinx.coroutines.tasks.await
 

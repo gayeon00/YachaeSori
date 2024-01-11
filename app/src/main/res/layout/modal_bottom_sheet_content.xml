@@ -62,10 +62,10 @@
                     android:id="@+id/tv_product_total_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:text="상품 0개"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textStyle="bold"
-                    tools:text="상품 1개" />
+                    tools:text="상품 0개" />
 
                 <View
                     android:layout_width="0dp"
@@ -76,7 +76,7 @@
                     android:id="@+id/tv_product_total_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:text="0원"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textStyle="bold"
                     tools:text="3,500원" />
