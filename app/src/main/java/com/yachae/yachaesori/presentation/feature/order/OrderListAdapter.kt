@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.yachae.yachaesori.MainActivity
 import com.yachae.yachaesori.R
-import com.yachae.yachaesori.data.Order
-import com.yachae.yachaesori.data.getOrderState
+import com.yachae.yachaesori.data.model.Order
+import com.yachae.yachaesori.data.model.getOrderState
 import com.yachae.yachaesori.databinding.ListItemOrderBinding
 
 class OrderListAdapter() :

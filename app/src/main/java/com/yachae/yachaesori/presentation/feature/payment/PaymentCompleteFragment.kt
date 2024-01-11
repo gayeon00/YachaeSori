@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.yachae.yachaesori.R
-import com.yachae.yachaesori.data.OrderItem
-import com.yachae.yachaesori.data.Product
+import com.yachae.yachaesori.data.model.OrderItem
+import com.yachae.yachaesori.data.model.Product
 import com.yachae.yachaesori.databinding.FragmentPaymentCompleteBinding
 
 class PaymentCompleteFragment : Fragment() {

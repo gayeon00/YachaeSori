@@ -1,4 +1,4 @@
-package com.yachae.yachaesori.data
+package com.yachae.yachaesori.data.model
 
 import com.google.firebase.database.IgnoreExtraProperties
 

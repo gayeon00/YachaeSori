@@ -8,9 +8,9 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
-import com.yachae.yachaesori.data.Order
-import com.yachae.yachaesori.data.OrderItem
-import com.yachae.yachaesori.data.Product
+import com.yachae.yachaesori.data.model.Order
+import com.yachae.yachaesori.data.model.OrderItem
+import com.yachae.yachaesori.data.model.Product
 import com.yachae.yachaesori.databinding.FragmentOrderListBinding
 
 class OrderListFragment : Fragment() {

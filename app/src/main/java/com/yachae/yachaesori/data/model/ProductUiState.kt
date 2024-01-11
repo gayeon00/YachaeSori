@@ -1,4 +1,4 @@
-package com.yachae.yachaesori.data
+package com.yachae.yachaesori.data.model
 
 data class ProductUiState (
     val productId: String = "",

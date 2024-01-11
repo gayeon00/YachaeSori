@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.yachae.yachaesori.R
-import com.yachae.yachaesori.data.OrderItem
-import com.yachae.yachaesori.data.getOrderState
-import com.yachae.yachaesori.databinding.ListItemOrderProductBinding
+import com.yachae.yachaesori.data.model.OrderItem
+import com.yachae.yachaesori.data.model.getOrderState
+import com.yachae.yachaesori.databinding.ListItemSelectedItemBinding
 import java.text.DecimalFormat
 
 class ItemListAdapter(private val isDetail: Boolean) :
     ListAdapter<OrderItem, ItemListAdapter.OrderItemViewHolder>(OrderItemDiffCallBack()) {
     class OrderItemViewHolder(
-        private val binding: ListItemOrderProductBinding,
+        private val binding: ListItemSelectedItemBinding,
         private val isDetail: Boolean
     ) : ViewHolder(binding.root) {
         fun bind(item: OrderItem) {
@@ -38,7 +38,7 @@ class ItemListAdapter(private val isDetail: Boolean) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderItemViewHolder {
         return OrderItemViewHolder(
-            ListItemOrderProductBinding.inflate(
+            ListItemSelectedItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

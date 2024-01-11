@@ -62,6 +62,9 @@
             android:id="@+id/action_paymentFragment2_to_paymentCompleteFragment2"
             app:destination="@id/paymentCompleteFragment2"
             app:popUpTo="@id/productDetailFragment" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/paymentCompleteFragment2"

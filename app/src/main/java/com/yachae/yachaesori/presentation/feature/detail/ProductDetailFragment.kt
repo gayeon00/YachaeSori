@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -15,7 +15,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.yachae.yachaesori.R
-import com.yachae.yachaesori.data.Product
+import com.yachae.yachaesori.data.model.Product
 import com.yachae.yachaesori.databinding.FragmentProductDetailBinding
 import com.yachae.yachaesori.presentation.feature.shop.home.product.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,8 +26,8 @@ class ProductDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val args: ProductDetailFragmentArgs by navArgs()
-    private val productViewModel: ProductViewModel by viewModels()
-    lateinit var product: Product
+    private val productViewModel: ProductViewModel by activityViewModels()
+    private val productDetailViewModel: ProductDetailViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,17 +45,18 @@ class ProductDetailFragment : Fragment() {
         Log.d("ProductDetailFragment", productViewModel.productList.value.toString())
 
         productViewModel.productList.observe(viewLifecycleOwner, Observer {
-            product = it[args.position]
-
-            setNaviIcon()
-            setTabLayout()
-            setPurchaseButton()
-            setMainImage()
-
+            productDetailViewModel.setProduct(it[args.position])
         })
+
+        productDetailViewModel.product.observe(viewLifecycleOwner){
+            setNaviIcon()
+            setTabLayout(it)
+            setPurchaseButton()
+            setMainImage(it)
+        }
     }
 
-    private fun setMainImage() {
+    private fun setMainImage(product: Product) {
         val storageReference = Firebase.storage.reference.child(product.mainImageUrl)
 
         Glide.with(this)
@@ -73,12 +74,12 @@ class ProductDetailFragment : Fragment() {
 
     private fun setPurchaseButton() {
         binding.btnPayment.setOnClickListener {
-            val optionBottomSheet = OptionBottomSheet(this)
+            val optionBottomSheet = OptionBottomSheet()
             optionBottomSheet.show(childFragmentManager, OptionBottomSheet.TAG)
         }
     }
 
-    private fun setTabLayout() {
+    private fun setTabLayout(product: Product) {
         childFragmentManager.beginTransaction()
             .replace(
                 R.id.fragment_container_view_detail,

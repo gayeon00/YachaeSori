@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.yachae.yachaesori.databinding.FragmentProductListBinding
@@ -16,7 +17,7 @@ class ProductListFragment : Fragment() {
     private var _fragmentProductBinding: FragmentProductListBinding? = null
     private val fragmentProductBinding get() = _fragmentProductBinding!!
 
-    private val productViewModel: ProductViewModel by viewModels()
+    private val productViewModel: ProductViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

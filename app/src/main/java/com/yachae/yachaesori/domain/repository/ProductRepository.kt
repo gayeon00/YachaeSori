@@ -1,6 +1,6 @@
 package com.yachae.yachaesori.domain.repository
 
-import com.yachae.yachaesori.data.Product
+import com.yachae.yachaesori.data.model.Product
 
 interface ProductRepository {
     suspend fun getProducts(): List<Product>
