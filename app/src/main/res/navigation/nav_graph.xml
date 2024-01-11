@@ -65,6 +65,9 @@
         <argument
             android:name="position"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_paymentFragment2_to_addressDialogFragment"
+            app:destination="@id/addressDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentCompleteFragment2"
@@ -86,4 +89,9 @@
             android:id="@+id/action_orderListFragment_to_orderDetailFragment2"
             app:destination="@id/orderDetailFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/addressDialogFragment"
+        android:name="com.yachae.yachaesori.presentation.feature.payment.AddressDialogFragment"
+        android:label="fragment_address_dialog"
+        tools:layout="@layout/fragment_address_dialog" />
 </navigation>
