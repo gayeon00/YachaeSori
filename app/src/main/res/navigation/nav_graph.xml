@@ -79,7 +79,8 @@
             app:destination="@id/orderDetailFragment2" />
         <action
             android:id="@+id/action_paymentCompleteFragment2_to_shopFragment"
-            app:destination="@id/shopFragment" />
+            app:destination="@id/shopFragment"
+            app:popUpTo="@id/shopFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"

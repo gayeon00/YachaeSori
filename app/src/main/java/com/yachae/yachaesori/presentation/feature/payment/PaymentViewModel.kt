@@ -1,6 +1,8 @@
 package com.yachae.yachaesori.presentation.feature.payment
 
+import android.telephony.PhoneNumberUtils
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -50,6 +52,24 @@ class PaymentViewModel @Inject constructor(
     private val _msg = MutableLiveData<String>()
     val msg: LiveData<String> = _msg
 
+    private val _orderKey = MutableLiveData<String>()
+    val orderKey: LiveData<String> get() = _orderKey
+
+    val combinedInfo = MediatorLiveData<String>()
+
+    init {
+        combinedInfo.addSource(name) { updateCombinedInfo() }
+        combinedInfo.addSource(phone) { updateCombinedInfo() }
+        combinedInfo.addSource(postcode) { updateCombinedInfo() }
+        combinedInfo.addSource(address) { updateCombinedInfo() }
+    }
+
+    private fun updateCombinedInfo() {
+        val formattedPhone =
+            PhoneNumberUtils.formatNumber(phone.value, Locale.getDefault().getCountry())
+        combinedInfo.value = "${name.value} / $formattedPhone\n[${postcode.value}] ${address.value}"
+    }
+
 
     fun setSelectedItemList(selectedItem: List<SelectedItem>) {
         _selectedItemList.value = selectedItem
@@ -93,6 +113,10 @@ class PaymentViewModel @Inject constructor(
         _msg.value = msg
     }
 
+    fun setOrderKey(key: String) {
+        _orderKey.value = key
+    }
+
     fun saveOrder(
         place: String,
         postcode: String,
@@ -108,8 +132,8 @@ class PaymentViewModel @Inject constructor(
             OrderItem(it.product, it.selectedOption, it.quantity, 0)
         }
 
-        CoroutineScope(Dispatchers.IO).launch {
-            orderRepository.placeOrder(
+        viewModelScope.launch {
+            val orderKey = orderRepository.placeOrder(
                 Order(
                     null,
                     0,
@@ -125,7 +149,9 @@ class PaymentViewModel @Inject constructor(
                     totalPrice.value!!
                 )
             )
+            setOrderKey(orderKey)
         }
+
 
     }
 }

@@ -325,7 +325,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
-                        android:text="2,500원" />
+                        android:text="3,000원" />
 
                 </LinearLayout>
 

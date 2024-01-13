@@ -104,7 +104,7 @@ class PaymentFragment : Fragment() {
                     paymentViewModel.address.value + " " + editTextDetailAddress.text.toString()
                 val name = editTextName.text.toString()
                 val phone = editTextPhone.text.toString()
-                val msg = editTextMsg.text.toString()
+                val msg = autoCompleteTextView.text.toString()
                 saveOrder(place, postcode, address, name, phone, msg)
                 //주문 완료 화면으로 넘어가기
                 findNavController().navigate(R.id.action_paymentFragment2_to_paymentCompleteFragment2)
