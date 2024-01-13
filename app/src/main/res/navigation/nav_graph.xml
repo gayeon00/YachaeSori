@@ -93,5 +93,10 @@
         android:id="@+id/addressDialogFragment"
         android:name="com.yachae.yachaesori.presentation.feature.payment.AddressDialogFragment"
         android:label="fragment_address_dialog"
-        tools:layout="@layout/fragment_address_dialog" />
+        tools:layout="@layout/fragment_address_dialog" >
+        <action
+            android:id="@+id/action_addressDialogFragment_to_paymentFragment2"
+            app:destination="@id/paymentFragment2"
+            app:popUpTo="@id/paymentFragment2" />
+    </fragment>
 </navigation>

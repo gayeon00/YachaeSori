@@ -27,13 +27,7 @@ class OrderListFragment : Fragment() {
         OrderItem(product, "1", 10, 0),
     )
 
-    private val orderList = mutableListOf(
-        Order(0, "11111", "11111", "2024.1.2", "문 앞에 놓아주세요", 112000, itemList, "부산시 사하구 다대로"),
-        Order(0, "11111", "11111", "2024.1.2", "문 앞에 놓아주세요", 112000, itemList, "부산시 사하구 다대로"),
-        Order(0, "11111", "11111", "2024.1.2", "문 앞에 놓아주세요", 112000, itemList, "부산시 사하구 다대로"),
-        Order(0, "11111", "11111", "2024.1.2", "문 앞에 놓아주세요", 112000, itemList, "부산시 사하구 다대로"),
-        Order(0, "11111", "11111", "2024.1.2", "문 앞에 놓아주세요", 112000, itemList, "부산시 사하구 다대로"),
-    )
+    private val orderList = mutableListOf<Order>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
