@@ -63,14 +63,14 @@
                             android:id="@+id/tv_place"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="8">
+                            android:layout_weight="8"
+                            android:hint="예) 집, 회사">
 
                             <EditText
                                 android:id="@+id/edit_text_place"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="10dp"
-                                android:text="예) 집, 회사"/>
+                                android:padding="10dp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
@@ -168,8 +168,8 @@
                                 android:id="@+id/edit_text_detail_address"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="10dp"
-                                android:text="상세 주소를 입력해주세요"/>
+                                android:hint="상세 주소를 입력해주세요"
+                                android:padding="10dp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
@@ -197,8 +197,8 @@
                                 android:id="@+id/edit_text_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="10dp"
-                                android:text="이름을 입력해주세요"/>
+                                android:hint="이름을 입력해주세요"
+                                android:padding="10dp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
@@ -227,9 +227,9 @@
                                 android:id="@+id/edit_text_phone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:hint="휴대폰 번호를 입력해주세요"
                                 android:inputType="phone"
-                                android:padding="10dp"
-                                android:text="휴대폰 번호를 입력해주세요" />
+                                android:padding="10dp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
@@ -244,15 +244,15 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
+                    android:layout_marginTop="16dp"
+                    android:hint="배송 메세지를 선택해주세요">
 
                     <AutoCompleteTextView
                         android:id="@+id/autoCompleteTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="none"
-                        app:simpleItems="@array/ship_msg_array"
-                        android:text="배송 메세지를 선택해주세요"/>
+                        app:simpleItems="@array/ship_msg_array" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

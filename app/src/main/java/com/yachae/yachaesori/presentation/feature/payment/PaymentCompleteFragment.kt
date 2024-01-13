@@ -5,27 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.yachae.yachaesori.R
-import com.yachae.yachaesori.data.model.OrderItem
-import com.yachae.yachaesori.data.model.Product
+import com.yachae.yachaesori.data.model.Order
 import com.yachae.yachaesori.databinding.FragmentPaymentCompleteBinding
+import com.yachae.yachaesori.presentation.feature.order.OrderDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 
+@AndroidEntryPoint
 class PaymentCompleteFragment : Fragment() {
+    private val orderDetailViewModel: OrderDetailViewModel by activityViewModels()
+    private val paymentViewModel: PaymentViewModel by activityViewModels()
     private var _binding: FragmentPaymentCompleteBinding? = null
     private val binding get() = _binding!!
 
-    private val adapter = ItemListAdapter(false)
-    private val product = Product("test1", "", "", "test1", 1000, listOf("1", "2", "3", "4"))
-    private val orderItemList = mutableListOf(
-        OrderItem(product, "1", 2, 1),
-        OrderItem(product, "1", 2, 1),
-        OrderItem(product, "1", 2, 1),
-        OrderItem(product, "1", 2, 1),
-        OrderItem(product, "1", 2, 1),
-        OrderItem(product, "1", 2, 1),
-        OrderItem(product, "1", 2, 1)
-    )
+    private val adapter = SelectedItemListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,22 +32,53 @@ class PaymentCompleteFragment : Fragment() {
     ): View {
         _binding = FragmentPaymentCompleteBinding.inflate(layoutInflater)
         binding.orderItemList.adapter = adapter
-        adapter.submitList(orderItemList)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        paymentViewModel.orderKey.observe(viewLifecycleOwner) {
+            orderDetailViewModel.fetchOrder(it)
+        }
+
+        setPayDue()
+        setShipDetail()
+        setTotalPrice()
+        setItemList()
         setNaviIcon()
         setPayDetailButton()
         setContinueButton()
         setItemExpandButton()
-        setItemList()
     }
 
     private fun setItemList() {
+        paymentViewModel.selectedItemList.observe(viewLifecycleOwner) {
+            binding.tvPayCompItems.text = "${it[0].product.name}외 ${it.size - 1}개"
+            adapter.submitList(it)
+        }
+    }
 
+    private fun setTotalPrice() {
+        paymentViewModel.totalPrice.observe(viewLifecycleOwner) {
+            binding.tvPayCompTotalPrice.text = DecimalFormat("#,###").format(it) + "원"
+        }
+    }
+
+    private fun setShipDetail() {
+        paymentViewModel.combinedInfo.observe(viewLifecycleOwner) {
+            binding.tvPayCompAddress.text = it
+        }
+    }
+
+    private fun setPayDue() {
+        val cal = Calendar.getInstance()
+        cal.time = Date()
+        val df = SimpleDateFormat("MM.dd(E)")
+
+        cal.add(Calendar.DATE, 1)
+        binding.tvPayDue.text = df.format(cal.time) + "까지 입금을 완료해주세요."
     }
 
     private fun setItemExpandButton() {
@@ -79,7 +109,7 @@ class PaymentCompleteFragment : Fragment() {
     private fun setPayDetailButton() {
         binding.btnContinueShopping.setOnClickListener {
             //쇼핑 홈으로 이동
-            findNavController().navigate(R.id.action_paymentCompleteFragment2_to_shopFragment)
+            findNavController().popBackStack(R.id.shopFragment, false)
         }
     }
 
