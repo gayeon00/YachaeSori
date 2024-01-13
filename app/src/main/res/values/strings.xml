@@ -3,14 +3,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+    <string-array name="ship_msg_array">
+        <item>문 앞에 놔주세요.</item>
+        <item>택배함에 놔주세요.</item>
+        <item>경비실에 맡겨주세요.</item>
+        <item>배송 전 미리 연락 바랍니다.</item>
+        <item>부재 시 핸드폰으로 연락주세요.</item>
+        <item>부재 시 집 앞에 놔주세요.</item>
+        <item>부재 시 경비실에 맡겨주세요</item>
+        <item>기타</item>
     </string-array>
 </resources>

@@ -2,7 +2,9 @@ package com.yachae.yachaesori.di
 
 import com.yachae.yachaesori.data.remote.FirebaseFunctionsDataSource
 import com.yachae.yachaesori.data.remote.FirebaseUserDataSource
+import com.yachae.yachaesori.data.repository.OrderRepositoryImpl
 import com.yachae.yachaesori.data.repository.ProductRepositoryImpl
+import com.yachae.yachaesori.domain.repository.OrderRepository
 import com.yachae.yachaesori.domain.repository.ProductRepository
 import dagger.Module
 import dagger.Provides
@@ -31,6 +33,12 @@ object AppModule {
     @Singleton
     fun provideProductRepository(): ProductRepository {
         return ProductRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideOrderRepository(): OrderRepository {
+        return OrderRepositoryImpl()
     }
 
 }
