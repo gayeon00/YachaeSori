@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.yachae.yachaesori.data.model.Order
 import com.yachae.yachaesori.domain.repository.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,7 +26,7 @@ class OrderDetailViewModel @Inject constructor(
     }
 
     fun fetchOrder(id: String){
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             val order = orderRepository.fetchOrder(id)
             order.orderId = id
 

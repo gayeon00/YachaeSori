@@ -4,7 +4,7 @@ data class Order(
     var orderId: String? = "",
     // 주문 완료 상태로 전송
     // Long -> String 변경
-    var status: Long = 0L,
+    var status: Long = OrderState.COMPLETE.code,
     //주문자 아이디
     var userId: String = "",
     var orderDate: String = "",

@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.yachae.yachaesori.data.model.Order
 import com.yachae.yachaesori.data.model.OrderItem
+import com.yachae.yachaesori.data.model.OrderState
 import com.yachae.yachaesori.databinding.FragmentOrderDetailBinding
 import com.yachae.yachaesori.presentation.feature.payment.ItemListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,7 +51,7 @@ class OrderDetailFragment : Fragment() {
         binding.run {
             textViewOrderDetailNum.text = "Id.${order.orderId}"
             textViewOrderDetailDate.text = order.orderDate
-            if (order.status == 0L) {
+            if (order.status == OrderState.COMPLETE.code) {
                 tvDetailPayDue.text = nextDay(order.orderDate)
                 layoutPayWait.visibility = View.VISIBLE
                 tvPayPrice.text = formatMoney(order.totalPrice)
@@ -61,7 +62,7 @@ class OrderDetailFragment : Fragment() {
             tvDetailMsg.text = order.msg
 
             tvDetailTotalPrice.text = formatMoney(order.totalPrice - 3000L)
-            if(order.status == 0L) {
+            if(order.status == OrderState.COMPLETE.code) {
                 tvDetailTotalPaid.text = formatMoney(0L)
             } else {
                 tvDetailTotalPaid.text = formatMoney(order.totalPrice)
