@@ -13,6 +13,7 @@ import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.model.Order
 import com.yachae.yachaesori.data.model.getOrderState
 import com.yachae.yachaesori.databinding.ListItemOrderBinding
+import java.text.DecimalFormat
 
 class OrderListAdapter() :
     ListAdapter<Order, OrderListAdapter.OrderListViewHolder>(OrderDiffCallBack()) {
@@ -46,7 +47,7 @@ class OrderListAdapter() :
                 imageViewMainImage.setImageResource(R.drawable.ic_launcher_background)
                 textViewOrderProducts.text ="${item.itemList[0].product.name} 외 ${item.itemList.size - 1}건"
                 textViewOrderOption.text =item.itemList[0].selectedOption
-                textViewOrderPrice.text =item.totalPrice.toString()
+                textViewOrderPrice.text = DecimalFormat("#,###").format(item.totalPrice)+"원"
 
                 root.setOnClickListener {
                     navigateToOrderDetail(item, it)

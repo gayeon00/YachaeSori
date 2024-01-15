@@ -18,15 +18,6 @@ class OrderListFragment : Fragment() {
     private var _binding: FragmentOrderListBinding? = null
     private val binding get() = _binding!!
 
-    private val product = Product("test1", "", "", "test1", 1000, listOf("1", "2", "3", "4"))
-
-    private val itemList = mutableListOf(
-        OrderItem(product, "1", 10, 0),
-        OrderItem(product, "1", 10, 0),
-        OrderItem(product, "1", 10, 0),
-        OrderItem(product, "1", 10, 0),
-    )
-
     private val orderList = mutableListOf<Order>()
 
     override fun onCreateView(
