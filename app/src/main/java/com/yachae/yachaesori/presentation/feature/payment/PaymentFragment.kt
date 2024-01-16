@@ -50,7 +50,7 @@ class PaymentFragment : Fragment() {
             totalPrice.observe(viewLifecycleOwner) {
                 binding.paymentCheck.text = DecimalFormat("#,###").format(it) + "원"
 
-                binding.tvTotalPrice.text = DecimalFormat("#,###").format(it + 3000) + "원"
+                binding.tvTotalPrice.text = DecimalFormat("#,###").format(it + 3000L) + "원"
             }
 
             postcode.observe(viewLifecycleOwner) {

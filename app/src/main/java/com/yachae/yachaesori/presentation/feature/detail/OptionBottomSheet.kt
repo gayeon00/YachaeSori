@@ -26,7 +26,7 @@ class OptionBottomSheet(
     private val binding get() = _binding!!
 
     private var totalCount = 0
-    private var totalPrice = 3000L
+    private var totalPrice = 0L
 
     //선택한 옵션 번호, 수량
     private val selectedItemList = mutableListOf<SelectedItem>()

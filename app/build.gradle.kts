@@ -9,6 +9,8 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("androidx.navigation.safeargs")
+    // Add the Crashlytics Gradle plugin
+    id("com.google.firebase.crashlytics")
 }
 
 val localProperties = Properties()
@@ -115,6 +117,10 @@ dependencies {
 
     //PowerSpinner
     implementation("com.github.skydoves:powerspinner:1.2.7")
+
+    //Crashlytics
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
 
 }
 

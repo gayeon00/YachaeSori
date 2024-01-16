@@ -129,14 +129,14 @@ class PaymentViewModel @Inject constructor(
         val sdfDate = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault())
         val orderDate = sdfDate.format(Date(System.currentTimeMillis()))
         val orderList = selectedItemList.value!!.map {
-            OrderItem(it.product, it.selectedOption, it.quantity, 0)
+            OrderItem(it.product, it.selectedOption, it.quantity, 1)
         }
 
         viewModelScope.launch {
             val orderKey = orderRepository.placeOrder(
                 Order(
                     null,
-                    0,
+                    1,
                     userId,
                     orderDate,
                     place,

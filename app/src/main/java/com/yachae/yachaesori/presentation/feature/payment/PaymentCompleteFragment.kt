@@ -62,7 +62,7 @@ class PaymentCompleteFragment : Fragment() {
 
     private fun setTotalPrice() {
         paymentViewModel.totalPrice.observe(viewLifecycleOwner) {
-            binding.tvPayCompTotalPrice.text = DecimalFormat("#,###").format(it) + "원"
+            binding.tvPayCompTotalPrice.text = DecimalFormat("#,###").format(it + 3000L) + "원"
         }
     }
 

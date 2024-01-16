@@ -61,7 +61,7 @@ class OrderDetailFragment : Fragment() {
             tvAddress.text = order.address
             tvDetailMsg.text = order.msg
 
-            tvDetailTotalPrice.text = formatMoney(order.totalPrice - 3000L)
+            tvDetailTotalPrice.text = formatMoney(order.totalPrice + 3000L)
             if(order.status == OrderState.COMPLETE.code) {
                 tvDetailTotalPaid.text = formatMoney(0L)
             } else {
