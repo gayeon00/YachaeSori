@@ -25,10 +25,4 @@ class MainViewModel : ViewModel() {
     fun removeAuthStateListener() {
         firebaseAuth.removeAuthStateListener(authStateListener)
     }
-
-    fun checkCurrentUser() {
-        val user = firebaseAuth.currentUser
-        _currentUser.value = user
-    }
-
 }

@@ -1,6 +1,7 @@
 package com.yachae.yachaesori.presentation.feature.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.yachae.yachaesori.MainActivity
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.model.Product
 import com.yachae.yachaesori.data.model.SelectedItem
@@ -57,13 +59,12 @@ class OptionBottomSheet(
 
 
     private fun setPurchaseButton() {
+        paymentViewModel.selectedItemList.observe(viewLifecycleOwner) {
+            binding.btnOptionPayment.isEnabled = it.isNotEmpty()
+        }
+
+        //TODO: 유효성 검사 처리
         binding.btnOptionPayment.setOnClickListener {
-            //결제 창으로 넘어가기
-            //productlist 중 몇번째 product인지, 선택한 옵션들과 그 갯수는 뭔지 넘겨줘야
-//            val action =
-//                ProductDetailFragmentDirections.actionProductDetailFragmentToPaymentFragment2(
-//                    position
-//                )
             val navController = findNavController()
             navController.navigate(R.id.action_productDetailFragment_to_paymentFragment2)
 
@@ -79,7 +80,7 @@ class OptionBottomSheet(
 
             //새롭게 선택된 옵션이라면
             if (item == null) {
-                var selectedItem = SelectedItem(product, product.options[position], 1)
+                val selectedItem = SelectedItem(product, product.options[position], 1)
 
                 val selectedOption = ItemSelectedOptionBinding.inflate(layoutInflater)
                 selectedOption.run {
@@ -101,12 +102,8 @@ class OptionBottomSheet(
                     paymentViewModel.setTotalCount(totalCount)
                     paymentViewModel.setTotalPrice(totalPrice)
 
-
+                    //수량추가
                     btnPlus.setOnClickListener {
-//                        optionList.remove(Pair(position, tvProductCount.text.toString().toInt()))
-//                        optionList.add(Pair(position, tvProductCount.text.toString().toInt() + 1))
-//                        productDetailViewModel.setOptions(optionList)
-
                         selectedItemList.remove(selectedItem)
                         selectedItem.quantity++
                         selectedItemList.add(selectedItem)
@@ -126,21 +123,9 @@ class OptionBottomSheet(
                         paymentViewModel.setTotalPrice(totalPrice)
 
                     }
+                    //수량빼기
                     btnMinus.setOnClickListener {
                         if (tvProductCount.text.toString().toInt() > 1) {
-//                            optionList.remove(
-//                                Pair(
-//                                    position,
-//                                    tvProductCount.text.toString().toInt()
-//                                )
-//                            )
-//                            optionList.add(
-//                                Pair(
-//                                    position,
-//                                    tvProductCount.text.toString().toInt() - 1
-//                                )
-//                            )
-//                            productDetailViewModel.setOptions(optionList)
                             selectedItemList.remove(selectedItem)
                             selectedItem.quantity--
                             selectedItemList.add(selectedItem)
@@ -161,9 +146,8 @@ class OptionBottomSheet(
                         }
 
                     }
+                    //선택취소
                     btnRemove.setOnClickListener {
-//                        optionList.remove(Pair(position, tvProductCount.text.toString().toInt()))
-//                        productDetailViewModel.setOptions(optionList)
                         selectedItemList.remove(selectedItem)
                         paymentViewModel.setSelectedItemList(selectedItemList)
 

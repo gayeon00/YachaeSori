@@ -39,7 +39,7 @@ class MyPageFragment : Fragment() {
     }
 
     private fun setToOrderListFrag() {
-        binding.cardViewShipping.setOnClickListener { findNavController().navigate(R.id.action_shopFragment_to_orderListFragment)  }
+        binding.cardViewShipping.setOnClickListener { findNavController().navigate(R.id.action_shopFragment_to_orderListFragment) }
         binding.cardViewOrderComplete.setOnClickListener { findNavController().navigate(R.id.action_shopFragment_to_orderListFragment) }
         binding.cardViewDeliveryCompletedCount.setOnClickListener { findNavController().navigate(R.id.action_shopFragment_to_orderListFragment) }
     }
