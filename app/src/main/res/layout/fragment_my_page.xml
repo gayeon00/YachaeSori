@@ -48,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         app:dividerColor="@color/border" />
 
     <LinearLayout
@@ -57,17 +58,18 @@
         android:layout_marginBottom="4dp"
         android:clipToPadding="false"
         android:orientation="horizontal"
-        android:padding="6dp">
+        android:padding="6dp"
+        android:visibility="gone">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardViewOrderComplete"
             style="@style/Widget.Material3.CardView.Elevated"
-            app:contentPadding="12dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            app:contentPadding="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,13 +101,13 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardViewShipping"
             style="@style/Widget.Material3.CardView.Elevated"
-            app:contentPadding="12dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            app:contentPadding="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -137,13 +139,13 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardViewDeliveryCompletedCount"
             style="@style/Widget.Material3.CardView.Elevated"
-            app:contentPadding="12dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            app:contentPadding="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -176,32 +178,44 @@
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:dividerColor="@color/border" />
 
     <TextView
         android:id="@+id/buttonDeliveryPointManage"
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        android:layout_marginTop="8dp"
         android:gravity="center_vertical"
         android:text="배송지 관리"
         android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/buttonLogOut"
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        android:layout_marginTop="8dp"
         android:clickable="true"
+        android:focusable="true"
         android:gravity="center_vertical"
         android:text="로그아웃"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/buttonOrderList"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:text="주문내역"
         android:textSize="18sp" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:visibility="gone"
         app:dividerColor="@color/border" />
 
     <LinearLayout
@@ -217,7 +231,8 @@
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             android:text="공지사항"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/buttonFAQ"
@@ -226,7 +241,8 @@
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             android:text="FAQ"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/buttonShowMyInquiry"
@@ -235,6 +251,7 @@
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             android:text="내 문의내역"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="gone" />
     </LinearLayout>
 </LinearLayout>
