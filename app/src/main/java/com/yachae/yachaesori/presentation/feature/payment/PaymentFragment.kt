@@ -1,6 +1,7 @@
 package com.yachae.yachaesori.presentation.feature.payment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.yachae.yachaesori.MainActivity
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.databinding.FragmentPaymentBinding
 import com.yachae.yachaesori.util.NetworkStatus
@@ -44,7 +46,6 @@ class PaymentFragment : Fragment() {
         paymentViewModel.run {
             selectedItemList.observe(viewLifecycleOwner) {
                 adapter.submitList(it)
-
             }
 
             totalPrice.observe(viewLifecycleOwner) {
@@ -98,16 +99,32 @@ class PaymentFragment : Fragment() {
     private fun setPayConfirmButton() {
         binding.run {
             paymentConfirmButton.setOnClickListener {
-                val place = editTextPlace.text.toString()
-                val postcode = editTextPostcode.text.toString()
-                val address =
-                    paymentViewModel.address.value + " " + editTextDetailAddress.text.toString()
-                val name = editTextName.text.toString()
-                val phone = editTextPhone.text.toString()
-                val msg = autoCompleteTextView.text.toString()
-                saveOrder(place, postcode, address, name, phone, msg)
-                //주문 완료 화면으로 넘어가기
-                findNavController().navigate(R.id.action_paymentFragment2_to_paymentCompleteFragment2)
+                saveOrderToViewModel(
+                    editTextPlace.text.toString(),
+                    editTextPostcode.text.toString(),
+                    editTextAddress.text.toString(),
+                    editTextDetailAddress.text.toString(),
+                    editTextName.text.toString(),
+                    editTextPhone.text.toString(),
+                    autoCompleteTextView.text.toString()
+                )
+
+                if (paymentViewModel.isInfoValid()) {
+                    // 유효성 검사 통과, 배송정보 전송 등의 처리
+                    //주문 완료 화면으로 넘어가기
+                    saveOrder(
+                        editTextPlace.text.toString(),
+                        editTextPostcode.text.toString(),
+                        editTextAddress.text.toString() + " " + editTextDetailAddress.text.toString(),
+                        editTextName.text.toString(),
+                        editTextPhone.text.toString(),
+                        autoCompleteTextView.text.toString()
+                    )
+                    findNavController().navigate(R.id.action_paymentFragment2_to_paymentCompleteFragment2)
+                } else {
+                    // 유효성 검사 실패, 사용자에게 오류 메시지 표시 등의 처리
+                    (requireActivity() as MainActivity).showSnackBar("배송 정보를 모두 입력해주세요.")
+                }
             }
         }
     }
@@ -120,7 +137,6 @@ class PaymentFragment : Fragment() {
         phone: String,
         msg: String
     ) {
-        saveOrderToViewModel(place, postcode, address, name, phone, msg)
         paymentViewModel.saveOrder(place, postcode, address, name, phone, msg)
     }
 
@@ -128,6 +144,7 @@ class PaymentFragment : Fragment() {
         place: String,
         postcode: String,
         address: String,
+        detailAddress:String,
         name: String,
         phone: String,
         msg: String
@@ -135,6 +152,7 @@ class PaymentFragment : Fragment() {
         CoroutineScope(Dispatchers.Main).launch {
             paymentViewModel.run {
                 setAddress(address)
+                setDetailAddress(detailAddress)
                 setName(name)
                 setPhone(phone)
                 setPlace(place)

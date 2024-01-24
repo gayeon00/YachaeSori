@@ -59,11 +59,11 @@ class OptionBottomSheet(
 
 
     private fun setPurchaseButton() {
+        //TODO: 여기 다시 보기 -> viewmodel분리하기
         paymentViewModel.selectedItemList.observe(viewLifecycleOwner) {
             binding.btnOptionPayment.isEnabled = it.isNotEmpty()
         }
 
-        //TODO: 유효성 검사 처리
         binding.btnOptionPayment.setOnClickListener {
             val navController = findNavController()
             navController.navigate(R.id.action_productDetailFragment_to_paymentFragment2)
