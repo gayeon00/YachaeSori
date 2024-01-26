@@ -5,12 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
-import com.yachae.yachaesori.MainActivity
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.model.Product
 import com.yachae.yachaesori.data.model.SelectedItem
@@ -26,12 +24,6 @@ class OptionBottomSheet(
 
     private var _binding: ModalBottomSheetContentBinding? = null
     private val binding get() = _binding!!
-
-    private var totalCount = 0
-    private var totalPrice = 0L
-
-    //선택한 옵션 번호, 수량
-    private val selectedItemList = mutableListOf<SelectedItem>()
     private val productDetailViewModel: ProductDetailViewModel by activityViewModels()
     private val paymentViewModel: PaymentViewModel by activityViewModels()
 
@@ -46,15 +38,77 @@ class OptionBottomSheet(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setSelectedOptions()
+        setTotalCount()
+        setTotalPrice()
+        setPurchaseButton()
+        setOptionDropdown(productDetailViewModel.product.value!!)
+    }
 
-        productDetailViewModel.product.observe(viewLifecycleOwner) {
-            setOptionDropdown(it)
-            setPurchaseButton()
+    private fun setTotalPrice() {
+        paymentViewModel.totalPrice.observe(viewLifecycleOwner) {
+            binding.tvProductTotalPrice.text =
+                "${DecimalFormat("#,###").format(it)}원"
+        }
+    }
+
+    private fun setTotalCount() {
+        paymentViewModel.totalCount.observe(viewLifecycleOwner) {
+            binding.tvProductTotalCount.text =
+                "상품 ${it}개"
         }
 
-//        paymentViewModel.selectedItemList.observe(viewLifecycleOwner) {
-//            Log.d(TAG, it.toString())
-//        }
+    }
+
+    private fun setSelectedOptions() {
+        paymentViewModel.selectedItemList.observe(viewLifecycleOwner) { list ->
+            binding.layoutSelectedOptions.removeAllViews()
+
+            for (item in list) {
+                val selectedOption = ItemSelectedOptionBinding.inflate(layoutInflater)
+
+                selectedOption.run {
+                    tvSelectedOption.text = item.selectedOption
+
+                    tvProductCount.text = item.quantity.toString()
+                    tvProductPrice.text = "${
+                        DecimalFormat("#,###").format(
+                            item.product.price * item.quantity
+                        )
+                    }원"
+
+
+                    //수량추가
+                    btnPlus.setOnClickListener {
+                        item.quantity++
+                        //list중 item의 quantity를 증가시켜서 다시 할당해주기
+                        paymentViewModel.setSelectedItemList(list.toList())
+                        paymentViewModel.setTotalCount(paymentViewModel.totalCount.value!! + 1)
+                        paymentViewModel.setTotalPrice(paymentViewModel.totalPrice.value!! + item.product.price)
+                    }
+                    //수량빼기
+                    btnMinus.setOnClickListener {
+                        if (item.quantity > 1) {
+                            item.quantity--
+                            paymentViewModel.setSelectedItemList(list.toList())
+                            paymentViewModel.setTotalCount(paymentViewModel.totalCount.value!! - 1)
+                            paymentViewModel.setTotalPrice(paymentViewModel.totalPrice.value!! - item.product.price)
+                        }
+                    }
+                    //선택취소
+                    btnRemove.setOnClickListener {
+                        val tmp = list.toMutableList()
+                        tmp.remove(item)
+
+                        paymentViewModel.setSelectedItemList(tmp)
+                        paymentViewModel.setTotalCount(paymentViewModel.totalCount.value!! - item.quantity)
+                        paymentViewModel.setTotalPrice(paymentViewModel.totalPrice.value!! - item.product.price * item.quantity)
+                    }
+                }
+
+                binding.layoutSelectedOptions.addView(selectedOption.root)
+            }
+        }
     }
 
 
@@ -72,117 +126,29 @@ class OptionBottomSheet(
     }
 
     private fun setOptionDropdown(product: Product) {
+
+        Log.d(TAG, product.options.toString())
+        // TODO: popbackstack으로 돌아오면 이 놈이 이상한걸로 선택돼있음
         (binding.autoCompleteTextView as MaterialAutoCompleteTextView).setSimpleItems(product.options.toTypedArray())
         (binding.autoCompleteTextView as MaterialAutoCompleteTextView).setOnItemClickListener { _, _, position, _ ->
 
-            val item =
-                binding.layoutSelectedOptions.findViewWithTag<LinearLayout>(product.options[position])
+            val fnd =
+                paymentViewModel.selectedItemList.value!!.find { it.selectedOption == product.options[position] }
+            //이미 선택된 옵션이라면 -> 기존의 옵션에 수량 추가하기
+            if (fnd != null) {
+                fnd.quantity++;
+            } else {
+                val tmp = paymentViewModel.selectedItemList.value!!.toMutableList()
+                tmp.add(SelectedItem(product, product.options[position], 1))
 
-            //새롭게 선택된 옵션이라면
-            if (item == null) {
-                val selectedItem = SelectedItem(product, product.options[position], 1)
-
-                val selectedOption = ItemSelectedOptionBinding.inflate(layoutInflater)
-                selectedOption.run {
-                    root.tag = product.options[position]
-                    tvSelectedOption.text = product.options[position]
-
-                    setPrice(product)
-
-                    totalCount += 1
-                    totalPrice += product.price
-                    binding.tvProductTotalCount.text =
-                        "상품 ${totalCount}개"
-                    binding.tvProductTotalPrice.text =
-                        "${DecimalFormat("#,###").format(totalPrice)}원"
-//                    optionList.add(Pair(position, 1))
-//                    productDetailViewModel.setOptions(optionList)
-                    selectedItemList.add(selectedItem)
-                    paymentViewModel.setSelectedItemList(selectedItemList)
-                    paymentViewModel.setTotalCount(totalCount)
-                    paymentViewModel.setTotalPrice(totalPrice)
-
-                    //수량추가
-                    btnPlus.setOnClickListener {
-                        selectedItemList.remove(selectedItem)
-                        selectedItem.quantity++
-                        selectedItemList.add(selectedItem)
-                        paymentViewModel.setSelectedItemList(selectedItemList)
-
-                        tvProductCount.text =
-                            (tvProductCount.text.toString().toInt() + 1).toString()
-
-                        totalCount += 1
-                        totalPrice += product.price
-                        binding.tvProductTotalCount.text =
-                            "상품 ${totalCount}개"
-                        binding.tvProductTotalPrice.text =
-                            "${DecimalFormat("#,###").format(totalPrice)}원"
-                        setPrice(product)
-                        paymentViewModel.setTotalCount(totalCount)
-                        paymentViewModel.setTotalPrice(totalPrice)
-
-                    }
-                    //수량빼기
-                    btnMinus.setOnClickListener {
-                        if (tvProductCount.text.toString().toInt() > 1) {
-                            selectedItemList.remove(selectedItem)
-                            selectedItem.quantity--
-                            selectedItemList.add(selectedItem)
-                            paymentViewModel.setSelectedItemList(selectedItemList)
-
-                            tvProductCount.text =
-                                (tvProductCount.text.toString().toInt() - 1).toString()
-
-                            totalCount -= 1
-                            totalPrice -= product.price
-                            binding.tvProductTotalCount.text =
-                                "상품 ${totalCount}개"
-                            binding.tvProductTotalPrice.text =
-                                "${DecimalFormat("#,###").format(totalPrice)}원"
-                            setPrice(product)
-                            paymentViewModel.setTotalCount(totalCount)
-                            paymentViewModel.setTotalPrice(totalPrice)
-                        }
-
-                    }
-                    //선택취소
-                    btnRemove.setOnClickListener {
-                        selectedItemList.remove(selectedItem)
-                        paymentViewModel.setSelectedItemList(selectedItemList)
-
-                        binding.layoutSelectedOptions.removeView(selectedOption.root)
-
-                        totalCount -= tvProductCount.text.toString().toInt()
-                        totalPrice -= product.price * tvProductCount.text.toString().toInt()
-                        binding.tvProductTotalCount.text =
-                            "상품 ${totalCount}개"
-                        binding.tvProductTotalPrice.text =
-                            "${DecimalFormat("#,###").format(totalPrice)}원"
-                        paymentViewModel.setTotalCount(totalCount)
-                        paymentViewModel.setTotalPrice(totalPrice)
-
-
-                    }
-                }
-                binding.layoutSelectedOptions.addView(selectedOption.root)
+                paymentViewModel.setSelectedItemList(tmp)
+                paymentViewModel.setTotalCount(paymentViewModel.totalCount.value!! + 1)
+                paymentViewModel.setTotalPrice(paymentViewModel.totalPrice.value!! + product.price)
             }
-
-
         }
     }
 
     companion object {
         const val TAG = "OptionBottomSheet"
     }
-}
-
-private fun ItemSelectedOptionBinding.setPrice(product: Product) {
-    tvProductPrice.text = "${
-        DecimalFormat("#,###").format(
-            product.price * tvProductCount.text.toString().toInt()
-        )
-    }원"
-
-
 }

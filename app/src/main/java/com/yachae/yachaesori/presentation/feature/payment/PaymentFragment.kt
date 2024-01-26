@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -37,6 +38,18 @@ class PaymentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                paymentViewModel.setSelectedItemList(emptyList())
+                paymentViewModel.setTotalCount(0)
+                paymentViewModel.setTotalPrice(0L)
+
+                findNavController().popBackStack()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
         setNaviIcon()
         setPayConfirmButton()
@@ -164,6 +177,11 @@ class PaymentFragment : Fragment() {
     private fun setNaviIcon() {
         binding.toolbarPayment.setNavigationOnClickListener {
             findNavController().popBackStack()
+            paymentViewModel.run {
+                setSelectedItemList(emptyList())
+                setTotalPrice(0L)
+                setTotalCount(0)
+            }
         }
     }
 

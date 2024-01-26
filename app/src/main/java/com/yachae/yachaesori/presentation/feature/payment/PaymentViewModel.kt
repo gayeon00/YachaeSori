@@ -40,6 +40,12 @@ class PaymentViewModel @Inject constructor(
     val phone = MutableLiveData<String>()
     val msg = MutableLiveData<String>()
 
+    init {
+        _selectedItemList.value = emptyList()
+        _totalCount.value = 0
+        _totalPrice.value = 0L
+    }
+
     fun isInfoValid(): Boolean {
         return isDeliveryNameValid() && isPostalCodeValid() && isAddressValid() && isDetailAddressValid() && isRecipientValid() && isMobileValid()
     }
