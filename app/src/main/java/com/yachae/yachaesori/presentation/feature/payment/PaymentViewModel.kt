@@ -13,8 +13,6 @@ import com.yachae.yachaesori.data.model.OrderItem
 import com.yachae.yachaesori.data.model.SelectedItem
 import com.yachae.yachaesori.domain.repository.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -34,23 +32,51 @@ class PaymentViewModel @Inject constructor(
     private val _totalPrice = MutableLiveData<Long>()
     val totalPrice: LiveData<Long> = _totalPrice
 
-    private val _address = MutableLiveData<String>()
-    val address: LiveData<String> = _address
+    val place = MutableLiveData<String>()
+    val postcode = MutableLiveData<String>()
+    val address = MutableLiveData<String>()
+    val detailAddress = MutableLiveData<String>()
+    val name = MutableLiveData<String>()
+    val phone = MutableLiveData<String>()
+    val msg = MutableLiveData<String>()
 
-    private val _postcode = MutableLiveData<String>()
-    val postcode: LiveData<String> = _postcode
+    init {
+        _selectedItemList.value = emptyList()
+        _totalCount.value = 0
+        _totalPrice.value = 0L
+    }
 
-    private val _place = MutableLiveData<String>()
-    val place: LiveData<String> = _place
+    fun isInfoValid(): Boolean {
+        return isDeliveryNameValid() && isPostalCodeValid() && isAddressValid() && isDetailAddressValid() && isRecipientValid() && isMobileValid()
+    }
 
-    private val _name = MutableLiveData<String>()
-    val name: LiveData<String> = _name
+    private fun isDeliveryNameValid(): Boolean {
+        return !place.value.isNullOrBlank()
+    }
 
-    private val _phone = MutableLiveData<String>()
-    val phone: LiveData<String> = _phone
+    private fun isPostalCodeValid(): Boolean {
+        return postcode.value?.let {
+            it.isNotBlank() && it.matches("^\\d{5}$".toRegex())
+        } ?: false
+    }
 
-    private val _msg = MutableLiveData<String>()
-    val msg: LiveData<String> = _msg
+    private fun isAddressValid(): Boolean {
+        return !address.value.isNullOrBlank()
+    }
+
+    private fun isDetailAddressValid(): Boolean {
+        return !detailAddress.value.isNullOrBlank()
+    }
+
+    private fun isRecipientValid(): Boolean {
+        return !name.value.isNullOrBlank()
+    }
+
+    private fun isMobileValid(): Boolean {
+        return phone.value?.let {
+            it.isNotBlank() && it.matches("^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$".toRegex())
+        } ?: false
+    }
 
     private val _orderKey = MutableLiveData<String>()
     val orderKey: LiveData<String> get() = _orderKey
@@ -58,7 +84,7 @@ class PaymentViewModel @Inject constructor(
     val combinedInfo = MediatorLiveData<String>()
 
     init {
-        combinedInfo.addSource(name) { updateCombinedInfo() }
+        combinedInfo.addSource(place) { updateCombinedInfo() }
         combinedInfo.addSource(phone) { updateCombinedInfo() }
         combinedInfo.addSource(postcode) { updateCombinedInfo() }
         combinedInfo.addSource(address) { updateCombinedInfo() }
@@ -83,34 +109,37 @@ class PaymentViewModel @Inject constructor(
         _totalPrice.value = totalPrice
     }
 
-    fun setAddress(address: String) {
+    fun setAddress(add: String) {
         viewModelScope.launch {
-            _address.value = address
+            address.value = add
         }
 
     }
 
-    fun setPostcode(postcode: String) {
-        viewModelScope.launch {
-            _postcode.value = postcode
-        }
+    fun setDetailAddress(detailAddress: String) {
+        this.detailAddress.value = detailAddress
+    }
 
+    fun setPostcode(pc: String) {
+        viewModelScope.launch {
+            postcode.value = pc
+        }
     }
 
     fun setName(name: String) {
-        _name.value = name
+        this.name.value = name
     }
 
     fun setPhone(phone: String) {
-        _phone.value = phone
+        this.phone.value = phone
     }
 
     fun setPlace(place: String) {
-        _place.value = place
+        this.place.value = place
     }
 
     fun setMsg(msg: String) {
-        _msg.value = msg
+        this.msg.value = msg
     }
 
     fun setOrderKey(key: String) {

@@ -70,6 +70,7 @@
                                 android:id="@+id/edit_text_place"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:inputType="text"
                                 android:padding="10dp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -169,6 +170,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="상세 주소를 입력해주세요"
+                                android:inputType="text"
                                 android:padding="10dp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -198,6 +200,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="이름을 입력해주세요"
+                                android:inputType="text"
                                 android:padding="10dp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -228,7 +231,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="휴대폰 번호를 입력해주세요"
-                                android:inputType="phone"
+                                android:inputType="text"
                                 android:padding="10dp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
