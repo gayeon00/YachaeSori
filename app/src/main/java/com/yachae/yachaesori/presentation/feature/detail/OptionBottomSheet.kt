@@ -128,7 +128,6 @@ class OptionBottomSheet(
     private fun setOptionDropdown(product: Product) {
 
         Log.d(TAG, product.options.toString())
-        // TODO: popbackstack으로 돌아오면 이 놈이 이상한걸로 선택돼있음
         (binding.autoCompleteTextView as MaterialAutoCompleteTextView).setSimpleItems(product.options.toTypedArray())
         (binding.autoCompleteTextView as MaterialAutoCompleteTextView).setOnItemClickListener { _, _, position, _ ->
 
