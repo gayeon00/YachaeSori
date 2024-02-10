@@ -4,12 +4,13 @@ import com.yachae.yachaesori.data.remote.FirebaseFunctionsDataSource
 import com.yachae.yachaesori.data.remote.FirebaseUserDataSource
 import com.yachae.yachaesori.data.repository.OrderRepositoryImpl
 import com.yachae.yachaesori.data.repository.ProductRepositoryImpl
+import com.yachae.yachaesori.domain.repository.HomeRepository
 import com.yachae.yachaesori.domain.repository.OrderRepository
 import com.yachae.yachaesori.domain.repository.ProductRepository
+import com.yachae.yachaesori.data.repository.HomeRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.scopes.FragmentScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -39,6 +40,12 @@ object AppModule {
     @Singleton
     fun provideOrderRepository(): OrderRepository {
         return OrderRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideHomeRepository(): HomeRepository {
+        return HomeRepositoryImpl()
     }
 
 }

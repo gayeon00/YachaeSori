@@ -11,12 +11,9 @@ import com.google.firebase.storage.ktx.storage
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.databinding.FragmentDetailImagesBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_DETAIL = "detailImageUrl"
 
 class DetailImagesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var detailImageUrl: String? = null
 
     private var _binding: FragmentDetailImagesBinding?=null

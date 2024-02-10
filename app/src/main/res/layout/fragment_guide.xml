@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:tag="f1"
-    tools:context=".presentation.feature.shop.home.guide.GuideFragment" >
+    android:tag="f1" >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,8 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:scaleType="fitStart"
-            app:srcCompat="@drawable/yachae_intro" />
+            android:scaleType="fitStart" />
     </ScrollView>
 
 </LinearLayout>
