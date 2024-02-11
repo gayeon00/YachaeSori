@@ -1,6 +1,8 @@
 package com.yachae.yachaesori.presentation.feature.shop.home.company
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,18 +32,17 @@ class CompanyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.introImageUrl.observe(viewLifecycleOwner) { url ->
-            setIntroImageView(url)
+        viewModel.introImageDownloadUri.observe(viewLifecycleOwner) { uri ->
+            Log.d("imageurl CompanyFragment", "가져온 setImageUrl: $uri")
+            setIntroImageView(uri)
         }
 
 
     }
 
-    private fun setIntroImageView(url: String) {
-        val storageReference = Firebase.storage.reference.child(url)
-
+    private fun setIntroImageView(uri: Uri) {
         Glide.with(this)
-            .load(storageReference)
+            .load(uri)
             .placeholder(R.drawable.yachae_logo)
             .into(binding.imageView)
     }

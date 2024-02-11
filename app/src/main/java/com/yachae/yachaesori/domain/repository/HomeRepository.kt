@@ -1,7 +1,9 @@
 package com.yachae.yachaesori.domain.repository
 
+import android.net.Uri
+
 interface HomeRepository {
-    suspend fun loadIntroImageUrl(): String?
-    suspend fun loadGuideImageUrl(): String?
+    suspend fun loadIntroImageDownloadUri(): Uri?
+    suspend fun loadGuideImageDownloadUri(): Uri?
 
 }

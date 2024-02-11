@@ -1,25 +1,23 @@
 package com.yachae.yachaesori.data.repository
 
+import android.net.Uri
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.yachae.yachaesori.domain.repository.HomeRepository
 import kotlinx.coroutines.tasks.await
 
 class HomeRepositoryImpl : HomeRepository {
-    private val database = FirebaseDatabase.getInstance()
+    override suspend fun loadIntroImageDownloadUri(): Uri {
+        val storageReference = Firebase.storage.reference.child("image/yachae_intro.jpg")
 
-    private val databasePath = "yachae"
-    override suspend fun loadIntroImageUrl(): String {
-        val databaseRef = database.getReference(databasePath).child("introImageUrl")
-        val snapshot = databaseRef.get().await()
-
-        return snapshot.getValue(String::class.java)!!
+        return storageReference.downloadUrl.await()
     }
 
-    override suspend fun loadGuideImageUrl(): String? {
-        val databaseRef = database.getReference(databasePath).child("guideImageUrl")
-        val snapshot = databaseRef.get().await()
+    override suspend fun loadGuideImageDownloadUri(): Uri? {
+        val storageReference = Firebase.storage.reference.child("image/yachae_guide.jpg")
 
-        return snapshot.getValue(String::class.java)!!
+        return storageReference.downloadUrl.await()
     }
 
 }

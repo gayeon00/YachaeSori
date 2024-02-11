@@ -1,5 +1,7 @@
 package com.yachae.yachaesori.presentation.feature.shop.home
 
+import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,26 +15,26 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repository: HomeRepository
 ) : ViewModel() {
-    private val _introImageUrl = MutableLiveData<String>()
-    val introImageUrl: LiveData<String> = _introImageUrl
+    private val _introImageDownloadUri = MutableLiveData<Uri>()
+    val introImageDownloadUri: LiveData<Uri> = _introImageDownloadUri
 
-    private val _guideImageUrl = MutableLiveData<String>()
-    val guideImageUrl: LiveData<String> = _guideImageUrl
+    private val _guideImageDownloadUri = MutableLiveData<Uri>()
+    val guideImageDownloadUri: LiveData<Uri> = _guideImageDownloadUri
 
     init {
-        loadIntroImageUrl()
-        loadGuideImageUrl()
+        loadIntroImageDownloadUri()
+        loadGuideImageDonwloadUri()
     }
 
-    private fun loadIntroImageUrl() {
+    private fun loadIntroImageDownloadUri() {
         viewModelScope.launch {
-            _introImageUrl.value = repository.loadIntroImageUrl()
+            _introImageDownloadUri.value = repository.loadIntroImageDownloadUri()
         }
     }
 
-    private fun loadGuideImageUrl() {
+    private fun loadGuideImageDonwloadUri() {
         viewModelScope.launch {
-            _guideImageUrl.value = repository.loadGuideImageUrl()
+            _guideImageDownloadUri.value = repository.loadGuideImageDownloadUri()
         }
     }
 
