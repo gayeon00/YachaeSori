@@ -36,7 +36,6 @@ class OrderListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setTabs()
         setNaviIcon()
     }
 
@@ -53,47 +52,5 @@ class OrderListFragment : Fragment() {
         binding.toolbarOrderList.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-    }
-
-    private fun setTabs() {
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-
-            override fun onTabSelected(tab: TabLayout.Tab) {
-
-                when (tab.position) {
-//                    0 -> {
-//                        orderViewModel.getOrderByUserUid(
-//                            Firebase.auth.currentUser!!.uid
-////            Firebase.auth.currentUser!!.uid
-//                        )
-//                    }
-//
-//                    1 -> {
-//                        orderViewModel.getOrderByState(Firebase.auth.currentUser!!.uid, 1)
-//
-//                    }
-//
-//                    2 -> {
-//                        orderViewModel.getOrderByState(Firebase.auth.currentUser!!.uid, 3)
-//                    }
-//
-//                    3 -> {
-//                        orderViewModel.getOrderByState(Firebase.auth.currentUser!!.uid, 4)
-//                    }
-//
-//                    4 -> {
-//                        orderViewModel.getOrderByState(Firebase.auth.currentUser!!.uid, 5, 6, 7)
-//                    }
-                }
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-                // Handle tab reselect
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                // Handle tab unselect
-            }
-        })
     }
 }

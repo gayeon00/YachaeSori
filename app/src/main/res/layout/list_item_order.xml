@@ -15,12 +15,20 @@
         android:paddingHorizontal="16dp">
 
         <TextView
+            android:id="@+id/textViewOrderNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No. 0823015328"
+            android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+        <TextView
             android:id="@+id/textViewOrderState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="배송중"
             android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="#F06292" />
+            android:textColor="#F06292"
+            android:visibility="invisible" />
 
         <View
             android:layout_width="0dp"
@@ -35,15 +43,6 @@
 
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textViewOrderNum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingHorizontal="16dp"
-        android:text="No. 0823015328"
-        android:textAppearance="?attr/textAppearanceTitleMedium" />
 
     <TextView
         android:id="@+id/textViewOrderDate"

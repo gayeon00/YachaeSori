@@ -35,13 +35,18 @@ class MyPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setLogOutButton()
-        setToOrderListFrag()
+        setToOrderList()
+
     }
 
-    private fun setToOrderListFrag() {
+    private fun setToOrderList() {
         binding.cardViewShipping.setOnClickListener { findNavController().navigate(R.id.action_shopFragment_to_orderListFragment) }
         binding.cardViewOrderComplete.setOnClickListener { findNavController().navigate(R.id.action_shopFragment_to_orderListFragment) }
         binding.cardViewDeliveryCompletedCount.setOnClickListener { findNavController().navigate(R.id.action_shopFragment_to_orderListFragment) }
+
+        binding.buttonOrderList.setOnClickListener {
+            findNavController().navigate(R.id.action_shopFragment_to_orderListFragment)
+        }
     }
 
     private fun setLogOutButton() {
