@@ -30,11 +30,11 @@ object AppModule {
         return FirebaseUserDataSource()
     }
 
-    @Provides
-    @Singleton
-    fun provideProductRepository(): ProductRepository {
-        return ProductRepositoryImpl()
-    }
+//    @Provides
+//    @Singleton
+//    fun provideProductRepository(): ProductRepository {
+//        return ProductRepositoryImpl()
+//    }
 
     @Provides
     @Singleton

@@ -7,8 +7,9 @@ import com.google.firebase.storage.ktx.storage
 import com.yachae.yachaesori.data.model.Product
 import com.yachae.yachaesori.domain.repository.ProductRepository
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class ProductRepositoryImpl : ProductRepository {
+class ProductRepositoryImpl @Inject constructor() : ProductRepository {
     override suspend fun getProducts(): List<Product> {
         val productList = mutableListOf<Product>()
 

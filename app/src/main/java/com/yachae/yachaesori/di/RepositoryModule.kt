@@ -20,4 +20,10 @@ abstract class RepositoryModule {
         userAuthRepositoryImpl: UserAuthRepositoryImpl
     ): UserAuthRepository
 
+    @Binds
+    @Singleton
+    abstract fun bindProductRepository(
+        productRepositoryImpl: ProductRepositoryImpl
+    ): ProductRepository
+
 }

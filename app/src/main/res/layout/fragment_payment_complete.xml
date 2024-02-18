@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             app:navigationIcon="@drawable/close_24px"
-            app:title="주문/결제 완료" />
+            app:title="주문완료" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -77,7 +77,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.5"
-                        android:text="결제 금액"
+                        android:text="주문 금액"
                         android:textSize="17sp" />
 
                     <TextView
@@ -100,7 +100,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.5"
-                        android:text="결제 정보"
+                        android:text="주문 정보"
                         android:textSize="17sp" />
 
                     <TextView
