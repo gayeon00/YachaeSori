@@ -15,6 +15,7 @@ import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.model.OrderItem
 import com.yachae.yachaesori.data.model.getOrderState
 import com.yachae.yachaesori.databinding.ListItemSelectedItemBinding
+import com.yachae.yachaesori.util.setImageFromUrl
 import java.text.DecimalFormat
 
 class ItemListAdapter(private val isDetail: Boolean) :
@@ -56,18 +57,6 @@ class ItemListAdapter(private val isDetail: Boolean) :
     }
 }
 
-private fun ImageView.setImageFromUrl(imageUrl: String) {
-
-    Log.d("ItemListAdapter", imageUrl)
-    val storageReference = Firebase.storage.reference.child(imageUrl)
-
-    Glide.with(context)
-        .load(storageReference)
-        .placeholder(R.drawable.ic_launcher_background)
-        .centerCrop()
-        .into(this)
-
-}
 
 private class OrderItemDiffCallBack : DiffUtil.ItemCallback<OrderItem>() {
     override fun areItemsTheSame(oldItem: OrderItem, newItem: OrderItem): Boolean {

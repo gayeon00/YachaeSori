@@ -13,6 +13,7 @@ import com.google.firebase.storage.ktx.storage
 import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.model.SelectedItem
 import com.yachae.yachaesori.databinding.ListItemSelectedItemBinding
+import com.yachae.yachaesori.util.setImageFromUrl
 import java.text.DecimalFormat
 
 class SelectedItemListAdapter :
@@ -48,18 +49,6 @@ class SelectedItemListAdapter :
     }
 }
 
-private fun ImageView.setImageFromUrl(imageUrl: String) {
-
-    Log.d("ProductListAdapter", imageUrl)
-    val storageReference = Firebase.storage.reference.child(imageUrl)
-
-    Glide.with(context)
-        .load(storageReference)
-        .placeholder(R.drawable.ic_launcher_background)
-        .centerCrop()
-        .into(this)
-
-}
 
 private class SelectedItemDiffCallback : DiffUtil.ItemCallback<SelectedItem>() {
     override fun areItemsTheSame(oldItem: SelectedItem, newItem: SelectedItem): Boolean {

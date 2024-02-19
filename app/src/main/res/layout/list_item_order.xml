@@ -15,12 +15,20 @@
         android:paddingHorizontal="16dp">
 
         <TextView
+            android:id="@+id/textViewOrderNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No. 0823015328"
+            android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+        <TextView
             android:id="@+id/textViewOrderState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="배송중"
             android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="#F06292" />
+            android:textColor="#F06292"
+            android:visibility="invisible" />
 
         <View
             android:layout_width="0dp"
@@ -37,15 +45,6 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textViewOrderNum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingHorizontal="16dp"
-        android:text="No. 0823015328"
-        android:textAppearance="?attr/textAppearanceTitleMedium" />
-
-    <TextView
         android:id="@+id/textViewOrderDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,45 +58,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingHorizontal="16dp">
 
-        <ImageView
-            android:id="@+id/imageViewMainImage"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            app:srcCompat="@drawable/credit_score_24px" />
+        <TextView
+            android:id="@+id/textViewOrderProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="레슬리 썸머 워싱 데님 팬츠 외 2건"
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="6dp"
-            android:layout_weight="7"
-            android:dividerPadding="6dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewOrderProducts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="레슬리 썸머 워싱 데님 팬츠 외 2건"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textViewOrderOption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="연핑크 1개" />
-
-            <TextView
-                android:id="@+id/textViewOrderPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="40,000원" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textViewOrderPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="40,000원" />
 
     </LinearLayout>
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.yachae.yachaesori.data.model.Order
@@ -18,7 +19,7 @@ class OrderListFragment : Fragment() {
     private var _binding: FragmentOrderListBinding? = null
     private val binding get() = _binding!!
 
-    private val orderList = mutableListOf<Order>()
+    private val orderViewModel: OrderViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,15 +30,17 @@ class OrderListFragment : Fragment() {
         handleBackPress()
 
         binding.recyclerViewOrderList.adapter = adapter
-        adapter.submitList(orderList)
+        orderViewModel.orderList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setTabs()
         setNaviIcon()
+
     }
 
     private fun handleBackPress() {
@@ -53,47 +56,5 @@ class OrderListFragment : Fragment() {
         binding.toolbarOrderList.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-    }
-
-    private fun setTabs() {
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-
-            override fun onTabSelected(tab: TabLayout.Tab) {
-
-                when (tab.position) {
-//                    0 -> {
-//                        orderViewModel.getOrderByUserUid(
-//                            Firebase.auth.currentUser!!.uid
-////            Firebase.auth.currentUser!!.uid
-//                        )
-//                    }
-//
-//                    1 -> {
-//                        orderViewModel.getOrderByState(Firebase.auth.currentUser!!.uid, 1)
-//
-//                    }
-//
-//                    2 -> {
-//                        orderViewModel.getOrderByState(Firebase.auth.currentUser!!.uid, 3)
-//                    }
-//
-//                    3 -> {
-//                        orderViewModel.getOrderByState(Firebase.auth.currentUser!!.uid, 4)
-//                    }
-//
-//                    4 -> {
-//                        orderViewModel.getOrderByState(Firebase.auth.currentUser!!.uid, 5, 6, 7)
-//                    }
-                }
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-                // Handle tab reselect
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                // Handle tab unselect
-            }
-        })
     }
 }

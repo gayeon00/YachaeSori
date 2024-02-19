@@ -120,7 +120,7 @@ class OptionBottomSheet(
 
         binding.btnOptionPayment.setOnClickListener {
             val navController = findNavController()
-            navController.navigate(R.id.action_productDetailFragment_to_paymentFragment2)
+            navController.navigate(R.id.action_productDetailFragment_to_paymentFragment)
 
         }
     }

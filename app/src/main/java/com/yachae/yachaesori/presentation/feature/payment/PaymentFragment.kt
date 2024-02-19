@@ -1,7 +1,6 @@
 package com.yachae.yachaesori.presentation.feature.payment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -86,7 +85,7 @@ class PaymentFragment : Fragment() {
             val status = NetworkStatus.getConnectivityStatus(requireContext())
             if (status == NetworkStatus.TYPE_MOBILE || status == NetworkStatus.TYPE_WIFI) {
 
-                findNavController().navigate(R.id.action_paymentFragment2_to_addressDialogFragment)
+                findNavController().navigate(R.id.action_paymentFragment_to_addressDialogFragment)
             } else {
                 Snackbar.make(
                     binding.root,
@@ -133,7 +132,7 @@ class PaymentFragment : Fragment() {
                         editTextPhone.text.toString(),
                         autoCompleteTextView.text.toString()
                     )
-                    findNavController().navigate(R.id.action_paymentFragment2_to_paymentCompleteFragment2)
+                    findNavController().navigate(R.id.action_paymentFragment_to_paymentCompleteFragment)
                 } else {
                     // 유효성 검사 실패, 사용자에게 오류 메시지 표시 등의 처리
                     (requireActivity() as MainActivity).showSnackBar("배송 정보를 모두 입력해주세요.")

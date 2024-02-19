@@ -8,9 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.yachae.yachaesori.R
-import com.yachae.yachaesori.data.model.Order
 import com.yachae.yachaesori.databinding.FragmentPaymentCompleteBinding
-import com.yachae.yachaesori.presentation.feature.order.OrderDetailViewModel
+import com.yachae.yachaesori.presentation.feature.order.OrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
@@ -19,7 +18,7 @@ import java.util.Date
 
 @AndroidEntryPoint
 class PaymentCompleteFragment : Fragment() {
-    private val orderDetailViewModel: OrderDetailViewModel by activityViewModels()
+    private val orderViewModel: OrderViewModel by activityViewModels()
     private val paymentViewModel: PaymentViewModel by activityViewModels()
     private var _binding: FragmentPaymentCompleteBinding? = null
     private val binding get() = _binding!!
@@ -40,7 +39,7 @@ class PaymentCompleteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         paymentViewModel.orderKey.observe(viewLifecycleOwner) {
-            orderDetailViewModel.fetchOrder(it)
+            orderViewModel.fetchOrder(it)
         }
 
         setPayDue()
@@ -102,7 +101,7 @@ class PaymentCompleteFragment : Fragment() {
     private fun setContinueButton() {
         binding.btnToOrderDetail.setOnClickListener {
             //주문 상세정보로 이동
-            findNavController().navigate(R.id.action_paymentCompleteFragment2_to_orderDetailFragment2)
+            findNavController().navigate(R.id.action_paymentCompleteFragment_to_orderDetailFragment)
         }
     }
 
