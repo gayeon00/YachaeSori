@@ -18,7 +18,6 @@ import com.yachae.yachaesori.databinding.FragmentAddressDialogBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -98,7 +97,7 @@ class AddressDialogFragment : Fragment() {
         }
         Log.d("Address", "뭐징")
         CoroutineScope(Dispatchers.Main).launch {
-            findNavController().navigate(R.id.action_addressDialogFragment_to_paymentFragment2)
+            findNavController().navigate(R.id.action_addressDialogFragment_to_paymentFragment)
         }
 
     }

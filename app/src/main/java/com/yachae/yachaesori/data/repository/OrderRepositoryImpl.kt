@@ -1,12 +1,19 @@
 package com.yachae.yachaesori.data.repository
 
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.yachae.yachaesori.data.model.Order
 import com.yachae.yachaesori.domain.repository.OrderRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class OrderRepositoryImpl : OrderRepository {
 
@@ -46,6 +53,41 @@ class OrderRepositoryImpl : OrderRepository {
             }
         }
     }
+
+    override suspend fun fetchOrderList(): List<Order> = suspendCoroutine { continuation ->
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val userId = currentUser?.uid
+
+        if (userId != null) {
+            val databaseRef = FirebaseDatabase.getInstance().reference.child("orders")
+            val query = databaseRef.orderByChild("userId").equalTo(userId)
+
+            query.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val orderList = mutableListOf<Order>()
+
+                    for (orderSnapshot in snapshot.children) {
+                        val order = orderSnapshot.getValue(Order::class.java)
+                        //orderId로 key넣어주기
+                        order?.orderId = orderSnapshot.key
+                        order?.let { orderList.add(it) }
+                    }
+
+                    // 데이터를 가져왔으면 결과를 반환
+                    continuation.resume(orderList)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // 에러가 발생했을 때 결과를 반환
+                    continuation.resumeWithException(error.toException())
+                }
+            })
+        } else {
+            // 현재 사용자가 없을 경우 빈 리스트 반환
+            continuation.resume(emptyList())
+        }
+    }
+
 }
 
 class OrderNotFoundException(message: String) : Exception(message)

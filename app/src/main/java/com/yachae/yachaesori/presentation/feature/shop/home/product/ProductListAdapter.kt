@@ -16,6 +16,7 @@ import com.yachae.yachaesori.R
 import com.yachae.yachaesori.data.model.Product
 import com.yachae.yachaesori.databinding.ListItemProductBinding
 import com.yachae.yachaesori.presentation.feature.shop.ShopFragmentDirections
+import com.yachae.yachaesori.util.setImageFromUrl
 import java.text.DecimalFormat
 
 class ProductListAdapter() :
@@ -63,19 +64,6 @@ class ProductListAdapter() :
         }
 
     }
-}
-
-private fun ImageView.setImageFromUrl(imageUrl: String) {
-
-    Log.d("ProductListAdapter", imageUrl)
-    val storageReference = Firebase.storage.reference.child(imageUrl)
-
-    Glide.with(context)
-        .load(storageReference)
-        .placeholder(R.drawable.ic_launcher_background)
-        .centerCrop()
-        .into(this)
-
 }
 
 private class ProductDiffCallBack : DiffUtil.ItemCallback<Product>() {

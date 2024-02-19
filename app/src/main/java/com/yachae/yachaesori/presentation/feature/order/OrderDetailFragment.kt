@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.yachae.yachaesori.data.model.Order
 import com.yachae.yachaesori.data.model.OrderItem
 import com.yachae.yachaesori.data.model.OrderState
@@ -21,10 +22,12 @@ import java.util.Locale
 
 @AndroidEntryPoint
 class OrderDetailFragment : Fragment() {
-    private val orderDetailViewModel: OrderDetailViewModel by activityViewModels()
+    private val orderViewModel: OrderViewModel by activityViewModels()
     private val adapter = ItemListAdapter(false)
     private var _binding: FragmentOrderDetailBinding? = null
     private val binding get() = _binding!!
+
+    private val args: OrderDetailFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -38,10 +41,11 @@ class OrderDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        orderDetailViewModel.order.observe(viewLifecycleOwner) {
+        orderViewModel.fetchOrder(args.orderId)
+
+        orderViewModel.order.observe(viewLifecycleOwner) {
             setOrderItems(it.itemList)
             setUi(it)
-
         }
 
         setNaviIcon()

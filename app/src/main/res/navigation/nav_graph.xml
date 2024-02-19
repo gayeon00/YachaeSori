@@ -39,8 +39,8 @@
             android:name="position"
             app:argType="integer" />
         <action
-            android:id="@+id/action_productDetailFragment_to_paymentFragment2"
-            app:destination="@id/paymentFragment2" />
+            android:id="@+id/action_productDetailFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
 
     </fragment>
     <fragment
@@ -56,36 +56,40 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/orderDetailFragment2"
+        android:id="@+id/orderDetailFragment"
         android:name="com.yachae.yachaesori.presentation.feature.order.OrderDetailFragment"
         android:label="fragment_order_detail"
-        tools:layout="@layout/fragment_order_detail" />
+        tools:layout="@layout/fragment_order_detail" >
+        <argument
+            android:name="orderId"
+            app:argType="string" />
+    </fragment>
     <fragment
-        android:id="@+id/paymentFragment2"
+        android:id="@+id/paymentFragment"
         android:name="com.yachae.yachaesori.presentation.feature.payment.PaymentFragment"
         android:label="fragment_payment"
         tools:layout="@layout/fragment_payment">
         <action
-            android:id="@+id/action_paymentFragment2_to_paymentCompleteFragment2"
-            app:destination="@id/paymentCompleteFragment2"
+            android:id="@+id/action_paymentFragment_to_paymentCompleteFragment"
+            app:destination="@id/paymentCompleteFragment"
             app:popUpTo="@id/productDetailFragment" />
         <argument
             android:name="position"
             app:argType="integer" />
         <action
-            android:id="@+id/action_paymentFragment2_to_addressDialogFragment"
+            android:id="@+id/action_paymentFragment_to_addressDialogFragment"
             app:destination="@id/addressDialogFragment"/>
     </fragment>
     <fragment
-        android:id="@+id/paymentCompleteFragment2"
+        android:id="@+id/paymentCompleteFragment"
         android:name="com.yachae.yachaesori.presentation.feature.payment.PaymentCompleteFragment"
         android:label="fragment_payment_complete"
         tools:layout="@layout/fragment_payment_complete">
         <action
-            android:id="@+id/action_paymentCompleteFragment2_to_orderDetailFragment2"
-            app:destination="@id/orderDetailFragment2" />
+            android:id="@+id/action_paymentCompleteFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
         <action
-            android:id="@+id/action_paymentCompleteFragment2_to_shopFragment"
+            android:id="@+id/action_paymentCompleteFragment_to_shopFragment"
             app:destination="@id/shopFragment"
             app:popUpTo="@id/shopFragment" />
     </fragment>
@@ -94,8 +98,8 @@
         android:name="com.yachae.yachaesori.presentation.feature.order.OrderListFragment"
         android:label="OrderListFragment">
         <action
-            android:id="@+id/action_orderListFragment_to_orderDetailFragment2"
-            app:destination="@id/orderDetailFragment2" />
+            android:id="@+id/action_orderListFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addressDialogFragment"
@@ -103,9 +107,9 @@
         android:label="fragment_address_dialog"
         tools:layout="@layout/fragment_address_dialog" >
         <action
-            android:id="@+id/action_addressDialogFragment_to_paymentFragment2"
-            app:destination="@id/paymentFragment2"
-            app:popUpTo="@id/paymentFragment2"
+            android:id="@+id/action_addressDialogFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment"
+            app:popUpTo="@id/paymentFragment"
             app:restoreState="true" />
     </fragment>
 </navigation>

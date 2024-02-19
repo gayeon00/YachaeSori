@@ -1,5 +1,8 @@
 package com.yachae.yachaesori.data.model
 
+import com.google.firebase.database.IgnoreExtraProperties
+
+@IgnoreExtraProperties
 data class Order(
     var orderId: String? = "",
     // 주문 완료 상태로 전송

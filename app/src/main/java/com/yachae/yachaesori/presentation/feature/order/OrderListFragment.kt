@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.yachae.yachaesori.data.model.Order
@@ -18,7 +19,7 @@ class OrderListFragment : Fragment() {
     private var _binding: FragmentOrderListBinding? = null
     private val binding get() = _binding!!
 
-    private val orderList = mutableListOf<Order>()
+    private val orderViewModel: OrderViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +30,9 @@ class OrderListFragment : Fragment() {
         handleBackPress()
 
         binding.recyclerViewOrderList.adapter = adapter
-        adapter.submitList(orderList)
+        orderViewModel.orderList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
         return binding.root
     }
 
@@ -37,6 +40,7 @@ class OrderListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setNaviIcon()
+
     }
 
     private fun handleBackPress() {
